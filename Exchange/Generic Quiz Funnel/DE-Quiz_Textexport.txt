@@ -1,0 +1,387 @@
+﻿DE-Quiz (new version HS) – Vollständiger Textexport
+=====================================================
+
+
+SEITE 1 – Landing Page / Opener
+================================
+Headline:   Finde heraus, was dein Körper dir sagen will.
+Subline:    Beantworte ein paar kurze Fragen und erhalte passende Einblicke und Empfehlungen.
+Button:     Jetzt starten
+
+
+SEITE 2 – Gender
+=================
+Frage:      Wie lautet dein biologisches Geschlecht?
+Antworten:
+  - Weiblich
+  - Männlich
+
+
+SEITE 3 – Concerns
+===================
+Frage:      Was ist in deinem Körper zuletzt passiert, das dich aufmerksam gemacht hat?
+Hinweis:    Wähle bis zu 4 Optionen aus:
+Antworten:
+  - Plötzliche Energietiefs
+  - Gewichtsschwankungen
+  - Schlafstörungen
+  - Stimmung oder Fokus
+  - PMS / Zyklusveränderungen
+  - Trainingsplateaus
+  - Stressreaktionen
+  - Sonstiges
+Button:     Weiter
+
+
+SEITE 4 – Issue Importance Scale
+==================================
+Frage:      Wie wichtig ist es dir, zu verstehen, was hinter diesen Signalen steckt?
+Typ:        Slider / Skala
+Skala:      0 (Weniger) → 10 (Sehr)
+Button:     Weiter
+
+
+SEITE 5 – Why Topic Is Important Now
+======================================
+Frage:      Warum ist dieses Thema gerade jetzt wichtig für dich?
+Antworten:
+  - Ich will verstehen, was wirklich los ist
+  - Ich will nicht länger raten
+  - Ich fühle mich „nicht wie ich selbst" und brauche Klarheit.
+  - Ich will bessere Entscheidungen treffen
+  - Ich will wieder Kontrolle
+  - Sonstiges
+Button:     Weiter
+
+
+SEITE 6 – When Did You Feel Like
+==================================
+Frage:      Wann hast du dich zuletzt stabil und „wie dich selbst" gefühlt?
+Antworten:
+  - In den letzten 4 Wochen
+  - Vor 2–3 Monaten
+  - Vor mehr als 6 Monaten
+  - Unsicher
+
+
+SEITE 7 – Buffer Text
+======================
+Text:       „Ohne klare Daten bleiben Entscheidungen unsicher. Mit diesem Panel eliminierst du die größten Unbekannten sofort."
+Button:     Weiter
+
+
+SEITE 8 – Goal in 12 Months
+=============================
+Frage:      Wo möchtest du in 12 Wochen stehen?
+Hinweis:    Wähle bis zu 4 Optionen aus:
+Antworten:
+  - Mehr Energie und Belastbarkeit
+  - Ausgeglichenen Hormonspiegel
+  - Besserer Stoffwechsel
+  - Mehr Leistung beim Sport
+  - Ausgeglichene Stimmung
+  - Erholsamerer und konstanter Schlaf
+Button:     Weiter
+
+
+SEITE 9 – Holding You Back
+============================
+Frage:      Was hält dich aktuell am stärksten davon ab?
+Antworten:
+  - Ich kenne die Ursache nicht.
+  - Mein Körper sendet widersprüchliche Signale.
+  - Ich brauche Zahlen und Fakten, um Entscheidungen zu treffen.
+  - Die Symptome verändern sich.
+  - Maßnahmen haben bisher nicht geholfen.
+  - Sonstiges
+
+
+SEITE 10 – Contact Details
+============================
+Text:       Wir ordnen deine Angaben jetzt den biologischen Systemen zu, die am stärksten mit deinen Symptomen verbunden sind. Willst du die Analyse freischalten?
+Felder:     E-Mail, Vorname, Land, Bundesland (versteckt)
+Button:     Analyse starten
+Opt-in:     Mit deiner Anmeldung erhältst du unseren Newsletter und stimmst Nutzungsanalysen zu. Du kannst dich jederzeit abmelden. Mehr dazu in unserer Datenschutzerklärung.*
+
+
+SEITE 11 – Buffer Text (personalisiert)
+=========================================
+Text:       Du willst [Ziel aus Seite 8] erreichen, fühlst aber aktuell [Symptome aus Seite 3].
+            Genau diese Lücke lässt sich biologisch erklären. Wir analysieren deine Angaben und zeigen, welche Körpersysteme typischerweise dafür verantwortlich sind.
+Button:     Weiter
+
+
+SEITE 12 – Feel Current Cause of Symptoms
+===========================================
+Frage:      Wie sicher fühlst du dich aktuell, die Ursache deiner Symptome zu kennen?
+Typ:        Slider / Skala
+Skala:      0 (Weniger) → 10 (Sehr)
+Button:     Weiter
+
+
+SEITE 13 – Expect From Results
+================================
+Frage:      Was erwartest du konkret von den Ergebnissen?
+Typ:        Dropdown
+Antworten:
+  - Klare Ursachen
+  - Konkrete Handlungsschritte
+  - Regelmäßige Verlaufsdaten
+  - Beruhigung, dass nichts Ernstes dahintersteckt  [→ Outcome: Holistic Core]
+  - Alles davon                                      [→ Outcome: Holistic Advanced]
+Button:     Weiter
+
+
+SEITE 14 – Insight Details
+============================
+Frage:      Wie detailliert sollen die Insights sein?
+Typ:        Dropdown
+Antworten:
+  - Überblick                              [→ kein Outcome zugewiesen]
+  - Mittlere Tiefe                         [→ Outcome: Holistic Core]
+  - Vollständige medizinische Detailtiefe  [→ Outcome: Holistic Advanced]
+Button:     Weiter
+
+
+SEITE 15 – Result Importance
+==============================
+Headline:   Danke, dass du dir Zeit für deine Gesundheit genommen hast.
+Text:       Bevor wir dir den passenden Test anzeigen: Was ist dir beim Ergebnis wichtiger?
+Antworten:
+  - Klarheit und Verständlichkeit
+  - Sicherheit meiner medizinischen Daten
+  - Geschwindigkeit der Ergebniszustellung
+  - Handlungsempfehlungen
+  - Alles davon
+Button:     Zu den Ergebnissen
+
+
+=====================================================
+OUTCOME-SEITEN
+=====================================================
+
+
+OUTCOME 1 – Hormontest Frau
+=============================
+Headline:   Der Female Hormone Check
+Subline:    Verstehe deinen Rhythmus. Stimmungsschwankungen, Zyklusprobleme oder Müdigkeit? Dein hormonelles Gleichgewicht beeinflusst alles – von deiner Haut bis zu deiner Energie. Finde heraus, was dein Körper dir sagen will.
+Button:     Jetzt Hormone Check buchen
+
+Abschnitt: Warum wir dir den Female Hormone Check empfehlen
+-----------------------------------------------------------
+Du fühlst dich oft nicht im Gleichgewicht, aber Standard-Bluttests zeigen „nichts Auffälliges"?
+Hormone sind komplexe Botenstoffe. Der Female-Hormone-Check ist speziell dafür entwickelt, die
+feine Abstimmung zwischen deinem Zyklus, deiner Vitalität und deinem Wohlbefinden zu prüfen.
+Wir schauen uns nicht nur einzelne Werte an, sondern das Verhältnis der Hormone zueinander –
+denn genau dort liegen oft die Ursachen für PMS, Unreinheiten oder Erschöpfung.
+
+Abschnitt: Was dir das bringt
+------------------------------
+
+Zyklus & Fruchtbarkeit
+Das Problem: Unregelmäßige Zyklen oder PMS sind oft Warnsignale für ein Ungleichgewicht zwischen Östrogen und Progesteron.
+Die Lösung: Wir messen die Steuerhormone FSH (follikelstimulierendes Hormon) und LH (luteinisierendes Hormon), ob die Eierstöcke die richtigen Signale vom Gehirn erhalten. Zusammen mit Estradiol und Progesteron erkennst du, ob du eine Östrogendominanz hast oder ob dein Zyklus optimal verläuft.
+
+Haut, Haare & Antrieb
+Das Problem: Plötzlich unreine Haut, Haarausfall oder fehlende Libido? Das liegt oft an den männlichen Hormonen (Androgenen).
+Die Lösung: Auch Frauen brauchen Testosteron für Energie. Wir prüfen dein Testosteron und den Freien Testosteron Index sowie DHEA-S. So finden wir heraus, ob ein Überschuss (oft bei PCOS) oder ein Mangel deine Beschwerden verursacht. SHBG zeigt uns zudem, wie viel dieser Hormone tatsächlich aktiv verfügbar sind.
+
+Stress & Sensibilität
+Das Problem: Stress kann den Zyklus komplett stoppen oder Brustspannen verursachen.
+Die Lösung: Wir messen Prolaktin. Ein erhöhter Wert kann ein Zeichen dafür sein, dass Stress (oder andere Faktoren) deine Sexualhormone unterdrückt und deinen natürlichen Rhythmus stört.
+
+Button:     Paket ansehen
+
+
+OUTCOME 2 – Hormontest Mann
+=============================
+Headline:   Der Male Hormone Check
+Subline:    Hol dir deinen Antrieb zurück. Keine Energie, weniger Muskelaufbau oder sinkende Libido? Das ist oft kein Zeichen von Alter, sondern von fehlender Balance. Überprüfe deinen Motor, statt Symptome zu ignorieren.
+Button:     Jetzt Hormone Check buchen
+
+Abschnitt: Warum wir dir den Male Hormone Check empfehlen
+----------------------------------------------------------
+Du merkst, dass du nicht mehr so leistungsfähig bist wie früher? Viele Männer akzeptieren das
+einfach als „normal". Wir nicht. Der Male Hormone Check liefert dir harte Daten zu deiner
+Männlichkeit. Wir messen nicht nur das Gesamt-Testosteron (was oft irreführend ist), sondern
+prüfen genau, wie viel davon deinem Körper tatsächlich zur Verfügung steht und ob Gegenspieler
+wie Stresshormone oder Östrogen dich ausbremsen.
+
+Abschnitt: Was dir das bringt
+------------------------------
+
+Deine echte Power
+Das Problem: Ein „normaler" Gesamt-Testosteronwert sagt oft nichts aus, wenn das Hormon gebunden und inaktiv ist.
+Die Lösung: Wir messen dein Gesamt-Testosteron und – noch wichtiger – das Freie Testosteron sowie den Freien Testosteron Index. Wir prüfen auch SHBG (Sex-Hormon-bindendes Globulin), das „Taxi", das Testosteron bindet. Nur so weißt du, wie viel Treibstoff wirklich in deinen Zellen ankommt.
+
+Die Balance & Stimmung
+Das Problem: Zu viel Östrogen kann Stimmungsschwankungen und Wassereinlagerungen verursachen; zu viel Prolaktin tötet die Libido.
+Die Lösung: Auch Männer brauchen Estradiol (Östrogen) für Gelenke und Libido – aber die Dosis macht das Gift. Wir messen zudem Prolaktin, ein Stresshormon, das deinen Antrieb massiv sabotieren kann.
+
+Die Signalzentrale (Warum ist der Wert niedrig?)
+Das Problem: Produzieren deine Hoden nicht genug, oder gibt das Gehirn nicht das Startsignal?
+Die Lösung: Wir analysieren die Steuerhormone LH und FSH, um die Ursache für niedrige Werte zu finden. Zusätzlich messen wir DHEA-S, das „Jugendhormon" der Nebenniere und eine wichtige Vorstufe für deine Vitalität.
+
+Button:     Paket ansehen
+
+
+OUTCOME 3 – LTH (Long-Term Health Check)
+==========================================
+Headline:   Der Long-Term Health Check
+Subline:    Gesundheit ist kein Zufall. Dein jährlicher TÜV für den Körper. Überprüfe die Vitalfunktionen deiner Organe, dein Diabetes-Risiko und dein Immunsystem – umfassender als beim Hausarzt, bequem per App.
+Button:     Jetzt Long-Term Health buchen
+
+Abschnitt: Warum wir dir den Long-Term Health Check empfehlen
+--------------------------------------------------------------
+Du willst sichergehen, dass im „Maschinenraum" alles rund läuft? Der Long-Term Health Check ist
+dein Sicherheitsnetz. Während Standard-Untersuchungen oft nur das Nötigste abdecken, schauen
+wir genauer hin. Wir analysieren, wie gut deine Entgiftungsorgane arbeiten, ob dein
+Langzeit-Zucker stabil ist und ob dein Immunsystem stillen Stress hat. Es ist das perfekte
+Paket für dein gutes Gewissen.
+
+Abschnitt: Was dir das bringt
+------------------------------
+
+Deine Filteranlagen
+Das Problem: Eine Fettleber oder Nierenschwäche spürt man oft erst, wenn es ernst wird.
+Die Lösung: Wir testen deine Leberenzyme (GGT, ALAT, ASAT), die sofort auf Alkohol, Medikamente oder schlechte Ernährung reagieren. Dazu prüfen wir die Filtrationsrate deiner Nieren (eGFR, Kreatinin), damit du sicher sein kannst, dass dein Körper Schadstoffe effizient entsorgt.
+
+Stoffwechsel & Diabetes-Vorsorge
+Das Problem: Ein einfacher Blutzuckertest ist nur eine Momentaufnahme.
+Die Lösung: Wir messen den HbA1c (Langzeitblutzucker). Dieser Wert verrät dir, wie dein Zuckerstoffwechsel in den letzten 3 Monaten lief – der wichtigste Marker zur Diabetes-Prävention. Zusätzlich checken wir die Bauchspeicheldrüse (Amylase, Lipase).
+
+Immunsystem & Blutbild
+Das Problem: Fühlst du dich oft schlapp oder infektanfällig?
+Die Lösung: Ein detailliertes Differentialblutbild (Leukozyten, Lymphozyten, Neutrophile etc.) zeigt, ob dein Körper gerade gegen Viren oder Bakterien kämpft. Wir messen zudem Immunglobulin G (IgG), um den Status deiner dauerhaften Abwehrkräfte zu sehen.
+
+Button:     Paket ansehen
+
+
+OUTCOME 4 – Sports Check
+==========================
+Headline:   Der Sports Check
+Subline:    Optimiere deinen Motor. Müdigkeit oder stagnierende Leistung haben oft biologische Ursachen. Dieser Check prüft die wichtigsten Treibstoffe für deine Performance – von der Sauerstoffversorgung bis zur Muskelregeneration.
+Button:     Jetzt Sports Check buchen
+
+Abschnitt: Warum wir dir den Sports Check empfehlen
+----------------------------------------------------
+Du bist aktiv, aber fühlst dich oft nicht zu 100 % leistungsfähig? Der Sportscheck konzentriert
+sich auf die Grundlagen, die Athleten am häufigsten vernachlässigen. Wir prüfen nicht nur, ob du
+„gesund" bist, sondern auch, ob dein Blut optimal Sauerstoff transportiert und ob du versteckte
+Entzündungen hast, die deine Erholung bremsen. Es ist das perfekte Wartungspaket für deinen Körper.
+
+Abschnitt: Was dir das bringt
+------------------------------
+
+Sauerstoff & Ausdauer (der „rote" Check)
+Das Problem: Eisenmangel ist der häufigste Grund für Leistungsabfall – nicht nur bei Frauen.
+Die Lösung: Wir messen deine Eisenspeicher (Ferritin) und den Sättigungsgrad (Transferrin Sättigung). Zusammen mit dem Blutbild (Hämoglobin, Erythrozyten) siehst du sofort, ob deine Muskeln genug Sauerstoff bekommen.
+
+Muskel-Power & Energie
+Das Problem: Standard-Tests messen Magnesium im Serum – das ist ungenau.
+Die Lösung: Wir messen Magnesium in den Erythrozyten (in den roten Blutkörperchen). Das ist der „wahre" Speicherwert für deine Muskeln. Dazu checken wir Vitamin B12 und Folsäure, um sicherzustellen, dass dein Energiestoffwechsel rund läuft.
+
+Regeneration & Entzündungsschutz
+Das Problem: Training verursacht Entzündungen. Chronische Entzündungen verhindern Fortschritt.
+Die Lösung: Wir bestimmen deinen Omega-3-Index (EPA & DHA) – den wichtigsten Schutzfaktor für Herz und Gelenke. Kombiniert mit hs-CRP (hochempfindliches C-reaktives Protein) weißt du, ob dein Körper bereit für das nächste Workout ist oder Pause braucht.
+
+
+OUTCOME 5 – Nutrition Check
+=============================
+Headline:   Der Nutrition Check
+Subline:    Dein Treibstoff-Audit. Müdigkeit, Konzentrationsprobleme oder blasse Haut? Selbst die beste Ernährung nützt nichts, wenn dein Körper die Nährstoffe nicht aufnimmt. Finde heraus, was dir wirklich fehlt.
+Button:     Jetzt Nutrition Check buchen
+
+Abschnitt: Warum wir dir den Nutrition Check empfehlen
+-------------------------------------------------------
+Du achtest auf deine Ernährung, vielleicht lebst du sogar vegetarisch oder vegan? Dann ist dieser
+Check dein wichtigstes Tool. Der Nutrition-Check schließt die Lücke zwischen „gut essen" und
+„gut versorgt sein". Wir messen die kritischen Nährstoffe, die für deine Energieproduktion
+unverzichtbar sind, aber im Alltag oft zu kurz kommen. Statt blind Nahrungsergänzungsmittel zu
+schlucken, bekommst du hier Fakten.
+
+Abschnitt: Was dir das bringt
+------------------------------
+
+Deine Energiereserven
+Das Problem: Eisenmangel ist der Klassiker bei Müdigkeit – ein einfaches „Eisen im Blut" zu messen reicht aber nicht.
+Die Lösung: Wir messen deinen Speicherwert Ferritin und prüfen mit Transferrin und der Transferrin-Sättigung, wie gut das Eisen transportiert wird. So erkennen wir einen leeren Tank, bevor du die Symptome spürst.
+
+Nerven & Stoffwechsel
+Das Problem: B-Vitamine sind der Zündfunke für deinen Stoffwechsel. Besonders bei pflanzlicher Ernährung (oder Stress) entstehen hier oft Lücken.
+Die Lösung: Wir analysieren die komplette Reihe: Vitamin B12 (Cobalamin) für Energie, Vitamin B9 (Folsäure) für die Zellerneuerung sowie Vitamin B6 und Vitamin B2. Damit dein Kopf und dein Körper leistungsfähig bleiben.
+
+Immunsystem & Stimmung
+Das Problem: Fast jeder in Mitteleuropa hat einen Mangel, besonders im Winter. Das drückt auf Stimmung und Abwehrkräfte.
+Die Lösung: Wir bestimmen deinen exakten Vitamin D (25-OH) Spiegel. Kein Raten mehr bei der Dosierung von Tropfen oder Tabletten – du erfährst genau, wie viel du brauchst, um in den optimalen Bereich zu kommen.
+
+Button:     Paket ansehen
+
+
+OUTCOME 6 – Holistic Core
+===========================
+Headline:   Der Holistic Core Check
+Subline:    Dein Gesundheits-Fundament 2.0. Vergiss veraltete Routine-Checks. Wir messen, was für deine langfristige Gesundheit wirklich zählt – von deinem biologischen Alter bis zu modernen Herz-Risikofaktoren.
+Button:     Jetzt Holistic Core buchen
+
+Abschnitt: Warum wir dir Holistic Core empfehlen
+-------------------------------------------------
+Du willst sichergehen, dass du gesund bist, aber nicht gleich 100 Werte messen? Der Holistic
+Core ist der perfekte Mittelweg. Er schließt die Lücke zwischen einem oberflächlichen
+Hausarzt-Check und einer teuren Vollanalyse. Wir schauen uns deine Organfunktionen, deinen
+Stoffwechsel und deine Herzgesundheit genau an – inklusive Werte, die die Schulmedizin oft erst
+misst, wenn es schon zu spät ist.
+
+Abschnitt: Was dir das bringt
+------------------------------
+
+Alterst du schneller als du solltest?
+Das Problem: Ein „normales" Cholesterin-Bild übersieht oft das wahre Risiko.
+Die Lösung: Wir bestimmen dein biologisches Alter, damit du siehst, wie fit deine Zellen wirklich sind. Dazu messen wir ApoB – den Goldstandard für Herzgesundheit – und Entzündungen (hs-CRP), um Risiken frühzeitig zu erkennen.
+
+Stoffwechsel & Energiemanagement
+Das Problem: Viele Ärzte messen nur den Nüchtern-Zucker. Das zeigt Probleme oft erst Jahre zu spät an.
+Die Lösung: Wir prüfen dein Nüchtern-Insulin und den HOMA-Index. So siehst du sofort, ob dein Körper effizient mit Kohlenhydraten umgeht oder ob du auf eine Insulinresistenz zusteuerst – der Schlüssel für stabile Energie und Fettverbrennung.
+
+Der System-Check
+Das Problem: „Müdigkeit" kann alles bedeuten.
+Die Lösung: Wir checken die Filterleistung deiner Nieren (eGFR, Kreatinin), deine Lebergesundheit (GGT, ALAT, ASAT) und deine Schilddrüsen-Basis (TSH), um sicherzustellen, dass dein Motor sauber läuft.
+
+Button:     Buchen / Termin
+
+
+OUTCOME 7 – Holistic Advanced
+===============================
+Headline:   Der Holistic Advanced Check
+Subline:    Dein Körper, komplett entschlüsselt. Du willst nicht nur Symptome behandeln, sondern verstehen, wie dein System wirklich funktioniert? Dies ist der umfassendste Einblick in deine Biologie, den wir anbieten.
+Button:     Jetzt Holistic Advanced buchen
+
+Abschnitt: Warum wir dir Holistic Advanced empfehlen
+-----------------------------------------------------
+Du suchst nach Antworten, die ein Standard-Blutbild beim Hausarzt nicht liefern kann. Egal ob du
+deine Langlebigkeit (Longevity) optimieren, diffusen Symptomen auf den Grund gehen oder deine
+langfristige Gesundheit absichern willst – du brauchst das volle Bild. Der Holistic Advanced ist
+unser „CEO-Check-up". Er analysiert nicht nur, ob du krank bist, sondern auch, wie vital deine
+Zellen, Organe und dein Stoffwechsel tatsächlich sind.
+
+Abschnitt: Was dir das bringt
+------------------------------
+
+Wie schnell altert mein Körper wirklich?
+Das Problem: Chronologisches Alter ≠ biologisches Alter. Herz-Kreislauf-Risiken werden oft zu spät erkannt.
+Die Lösung: Wir messen dein biologisches Alter und moderne Risikomarker wie ApoB (genauer als Cholesterin) und Homocystein. So weißt du genau, wie du deine Gesundheitsspanne verlängern kannst.
+
+Läuft mein Motor auf Sparflamme?
+Das Problem: Müdigkeit wird oft als „Stress" abgetan, liegt aber häufig an der Schilddrüse oder den Nebennieren.
+Die Lösung: Anders als Standard-Tests schauen wir uns nicht nur das TSH an, sondern die aktiven Schilddrüsenhormone (fT3, fT4) und dein Stresshormon Cortisol. Finde heraus, ob dein Antrieb fehlt oder blockiert wird.
+
+Bin ich wirklich versorgt?
+Das Problem: Du ernährst dich gesund, aber kommt es auch in der Zelle an? Versteckte Entzündungen rauben Energie.
+Die Lösung: Ein massives Profil an Fettsäuren (Omega-3-Index) und essenziellen Mineralstoffen zeigt dir, ob deine Ernährung schützt oder stresst. Wir messen sogar Holo-Transcobalamin (aktives B12) und Q10, um Energielücken in den Zellen zu finden.
+
+Button:     Buchen / Termin
+
+
+=====================================================
+Ende des Exports | DE-Quiz (new version HS) | 15 Quiz-Seiten + 7 Outcome-Seiten
+=====================================================
