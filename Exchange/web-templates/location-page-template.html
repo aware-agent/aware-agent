@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aware Bluttest in [CITY] – 100+ Biomarker, Ergebnisse in 2 Tagen</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #F6F5FC;
+  color: #040404;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ── CSS VARS ── */
+:root {
+  --black:     #040404;
+  --secondary: #605E64;
+  --border:    #CDC9DD;
+  --surface:   #EFECF9;
+  --bg:        #F6F5FC;
+  --white:     #FFFFFF;
+  --purple:    #A18AFF;
+  --blue:      #81B8FF;
+  --green:     #6AF0B6;
+  --pink:      #FF9CC7;
+  --yellow:    #FFBE68;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-xl: 28px; --r-pill: 9999px;
+  --max: 1100px;
+}
+
+/* ── LAYOUT ── */
+.container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+section { padding: 80px 0; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(246,245,252,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 24px;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo svg { height: 28px; width: auto; }
+.nav-cta {
+  background: var(--black); color: white;
+  border-radius: var(--r-pill); padding: 10px 22px;
+  font-size: 0.875rem; font-weight: 600; cursor: pointer; border: none;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── HERO (Ad-style, full-bleed) ── */
+.hero {
+  position: relative;
+  min-height: 600px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden;
+  border-bottom: none;
+  padding: 0;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  /* Aware lab / lifestyle photo — swap path per location as needed */
+  background:
+    linear-gradient(160deg, rgba(40,30,60,0.55) 0%, rgba(10,8,20,0.80) 100%),
+    url('../../assets/photos/aware-lab/Aware x Business Insider_Body image_Lab_01.jpg') center/cover no-repeat;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.80) 100%);
+}
+.hero-inner {
+  position: relative; z-index: 10;
+  max-width: var(--max); margin: 0 auto; padding: 72px 48px 64px;
+  display: grid; grid-template-columns: 1fr 480px; gap: 64px; align-items: end;
+  width: 100%;
+}
+/* Logo + rating row */
+.hero-top {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+  max-width: var(--max); margin: 0 auto; padding: 32px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  pointer-events: none;
+}
+.hero-rating { text-align: right; }
+.hero-rating .score { font-size: 1.25rem; font-weight: 700; color: #fff; }
+.hero-rating .stars-row { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+.hero-rating .stars { font-size: 1rem; color: #fff; letter-spacing: 2px; }
+.hero-rating .count { font-size: 0.8125rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+/* Headline */
+.hero-text { }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: var(--r-pill);
+  padding: 6px 14px; font-size: 0.8125rem; font-weight: 500;
+  color: rgba(255,255,255,0.80); margin-bottom: 20px;
+}
+.hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: #6AF0B6; flex-shrink: 0; }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 700; line-height: 1.06;
+  letter-spacing: -0.01em; color: #fff; margin-bottom: 20px;
+}
+.hero h1 em { font-style: italic; font-weight: 400; color: rgba(255,255,255,0.65); }
+.hero-sub {
+  font-size: 1.0625rem; font-weight: 300; color: rgba(255,255,255,0.65);
+  line-height: 1.65; margin-bottom: 32px;
+}
+.hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  background: #fff; color: var(--black);
+  border-radius: var(--r-pill); padding: 14px 28px;
+  font-size: 0.9375rem; font-weight: 700; cursor: pointer; border: none;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { opacity: 0.90; }
+.btn-primary svg { width: 18px; height: 18px; }
+.hero-link { font-size: 0.9375rem; font-weight: 500; color: rgba(255,255,255,0.60); text-decoration: underline; text-decoration-color: rgba(255,255,255,0.25); }
+.hero-link:hover { color: rgba(255,255,255,0.85); }
+
+/* Hero glass card */
+.hero-visual {
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--r-xl);
+  padding: 28px 32px;
+  position: relative;
+}
+.result-card {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--r-lg); padding: 16px 20px; margin-bottom: 10px;
+}
+.result-card:last-child { margin-bottom: 0; }
+.result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.result-zone { display: flex; align-items: center; gap: 10px; }
+.zone-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.result-label { font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.85); }
+.badge-ok { background: rgba(106,240,182,0.15); color: #6AF0B6; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: var(--r-pill); }
+.badge-low { background: rgba(255,190,104,0.15); color: #FFBE68; font-size: 0.75rem; font-weight: 600; padding: 3px 10px; border-radius: var(--r-pill); }
+.result-bar-bg { height: 5px; background: rgba(255,255,255,0.15); border-radius: var(--r-pill); overflow: hidden; }
+.result-bar-fill { height: 100%; border-radius: var(--r-pill); }
+.result-meta { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.75rem; color: rgba(255,255,255,0.40); }
+.hero-score-tag {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: var(--r-pill); padding: 8px 16px; margin-bottom: 20px;
+  font-size: 0.8125rem; font-weight: 600; color: rgba(255,255,255,0.80);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+
+/* Remaining hero bits unused after redesign */
+.hero-trust, .trust-text, .stars { display: none; }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  background: var(--black);
+  padding: 0; border: none;
+}
+.stats-bar-inner {
+  max-width: var(--max); margin: 0 auto; padding: 28px 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.stat-item {
+  text-align: center; padding: 8px 16px;
+  border-right: 1px solid rgba(255,255,255,0.10);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num { font-size: 1.75rem; font-weight: 800; color: white; letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 0.8125rem; font-weight: 400; color: rgba(255,255,255,0.50); }
+
+/* ── WHAT WE TEST ── */
+.zones-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 40px;
+}
+.zone-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 20px 24px;
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.zone-illus {
+  width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+}
+.zone-info h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 4px; }
+.zone-info p { font-size: 0.8125rem; color: var(--secondary); line-height: 1.5; }
+.zone-count { font-size: 0.75rem; font-weight: 600; margin-top: 6px; }
+
+/* ── PROCESS ── */
+.process-section { background: white; }
+.process-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  margin-top: 48px; position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute; top: 32px; left: calc(16.66% + 16px); right: calc(16.66% + 16px);
+  height: 1px; background: var(--border); z-index: 0;
+}
+.step { text-align: center; position: relative; z-index: 1; }
+.step-num {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; font-weight: 700; margin: 0 auto 20px;
+  color: var(--black);
+}
+.step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.step p { font-size: 0.875rem; color: var(--secondary); line-height: 1.6; }
+.step-detail {
+  margin-top: 12px; background: var(--surface); border-radius: var(--r-md);
+  padding: 10px 14px; font-size: 0.8125rem; color: var(--secondary);
+  display: inline-block;
+}
+
+/* ── LOCATION ── */
+.location-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  align-items: start; margin-top: 48px;
+}
+.location-info { }
+.location-info h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; }
+.location-details { list-style: none; }
+.location-details li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.9375rem;
+}
+.location-details li:last-child { border-bottom: none; }
+.location-icon { font-size: 1.125rem; flex-shrink: 0; margin-top: 1px; }
+.location-map {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-xl); overflow: hidden; aspect-ratio: 4/3;
+  display: flex; align-items: flex-end; justify-content: center;
+  color: var(--secondary); font-size: 0.875rem; text-align: center;
+  flex-direction: column; gap: 12px;
+  position: relative;
+  background-image: url('../../assets/photos/aware-lab/Aware x Business Insider_Body image_Lab_03.jpg');
+  background-size: cover; background-position: center;
+}
+.location-map::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.10) 60%);
+  border-radius: var(--r-xl);
+}
+.location-map > * { position: relative; z-index: 1; color: white; }
+.location-map > a { color: var(--purple) !important; }
+.location-map .map-placeholder-icon { display: none; }
+
+/* ── REVIEWS ── */
+.reviews-section { background: white; }
+.reviews-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; gap: 12px; }
+.reviews-overall { display: flex; align-items: baseline; gap: 10px; justify-content: center; }
+.reviews-score { font-size: 3rem; font-weight: 800; letter-spacing: -0.04em; }
+.reviews-meta { text-align: center; }
+.reviews-meta .stars { font-size: 1.125rem; display: block; margin-bottom: 2px; }
+.reviews-meta span { font-size: 0.875rem; color: var(--secondary); }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.review-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 20px;
+}
+.review-stars { font-size: 0.875rem; margin-bottom: 10px; }
+.review-text { font-size: 0.875rem; color: var(--secondary); line-height: 1.65; margin-bottom: 14px; }
+.reviewer { display: flex; align-items: center; gap: 10px; }
+.reviewer-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8125rem; font-weight: 700; flex-shrink: 0;
+  overflow: hidden; background-size: cover; background-position: center top;
+}
+.reviewer-avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+.reviewer-name { font-size: 0.8125rem; font-weight: 600; }
+.reviewer-date { font-size: 0.75rem; color: var(--secondary); }
+
+/* ── APP ── */
+.app-section {
+  background: var(--black); border: none; padding: 80px 0;
+}
+.app-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+.app-content { }
+.app-content h2 { font-size: 2.25rem; font-weight: 800; color: white; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px; }
+.app-content p { font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 32px; }
+.app-features { list-style: none; margin-bottom: 36px; }
+.app-features li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.9375rem; color: rgba(255,255,255,0.80);
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.app-features li:last-child { border-bottom: none; }
+.app-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+.app-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+.app-badge {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--r-md); padding: 10px 20px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.875rem; font-weight: 500; color: white; cursor: pointer;
+}
+.app-badge:hover { background: rgba(255,255,255,0.14); }
+.app-badge svg { width: 20px; height: 20px; fill: white; }
+.app-visual {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--r-xl); padding: 32px;
+}
+.app-screen {
+  background: var(--bg); border-radius: var(--r-lg); overflow: hidden;
+  padding: 20px;
+}
+.app-screen-header {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--secondary); margin-bottom: 16px;
+}
+.biomarker-row {
+  display: flex; align-items: center; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.biomarker-row:last-child { border-bottom: none; }
+.biomarker-zone-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.biomarker-name { font-size: 0.875rem; font-weight: 500; flex: 1; }
+.biomarker-value { font-size: 0.875rem; font-weight: 600; }
+.biomarker-status { font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: var(--r-pill); }
+
+/* ── FAQ ── */
+.faq-list { max-width: 720px; margin: 40px auto 0; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  width: 100%; text-align: left; background: none; border: none;
+  padding: 20px 0; display: flex; justify-content: space-between; align-items: center;
+  font-size: 1rem; font-weight: 600; cursor: pointer; color: var(--black);
+  gap: 16px;
+}
+.faq-q:hover { color: var(--purple); }
+.faq-icon { font-size: 1.25rem; flex-shrink: 0; transition: transform 0.2s; }
+.faq-a { display: none; padding: 0 0 20px; font-size: 0.9375rem; color: var(--secondary); line-height: 1.7; }
+.faq-item.open .faq-a { display: block; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+/* ── FOOTER CTA ── */
+.footer-cta { text-align: center; background: white; }
+.footer-cta h2 { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
+.footer-cta h2 em { font-style: normal; color: var(--purple); }
+.footer-cta p { font-size: 1.0625rem; color: var(--secondary); margin-bottom: 32px; }
+.footer-trust { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; font-size: 0.875rem; color: var(--secondary); }
+
+/* ── SECTION HEADER ── */
+.section-label {
+  font-size: 0.8125rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--purple); margin-bottom: 12px;
+}
+.section-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 12px; }
+.section-sub { font-size: 1.0625rem; color: var(--secondary); line-height: 1.65; max-width: 560px; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black); padding: 40px 0;
+  border: none;
+}
+.footer-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 24px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+}
+.footer-logo svg { height: 24px; width: auto; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 0.8125rem; color: rgba(255,255,255,0.40); }
+.footer-links a:hover { color: rgba(255,255,255,0.70); }
+.footer-copy { font-size: 0.8125rem; color: rgba(255,255,255,0.30); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero-inner, .location-grid, .app-inner { grid-template-columns: 1fr; }
+  .hero-inner { padding: 40px 24px 48px; }
+  .hero-top { padding: 24px; }
+  .hero h1 { font-size: 2.25rem; }
+  .hero-visual { display: none; }
+  .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .zones-grid { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: 1fr; gap: 24px; }
+  .process-steps::before { display: none; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <!-- Aware Wordmark Black -->
+      <svg height="28" viewBox="0 0 356 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M128.211 52.0678H101.76L97.2148 64.9754H86.3979L109.032 1.71027H121.03L143.664 64.9754H132.756L128.211 52.0678ZM125.302 43.6143L115.031 14.2542L104.668 43.6143H125.302Z" fill="#040404"/>
+        <path d="M214.043 14.8905L198.499 64.9754H187.591L177.502 27.9798L167.412 64.9754H156.504L140.87 14.8905H151.414L161.867 55.1584L172.502 14.8905H183.319L193.5 54.9766L203.862 14.8905H214.043Z" fill="#040404"/>
+        <path d="M215.606 39.7057C215.606 34.676 216.636 30.222 218.696 26.3437C220.817 22.4653 223.665 19.4657 227.241 17.3447C230.877 15.1632 234.876 14.0724 239.239 14.0724C243.178 14.0724 246.602 14.8602 249.511 16.4358C252.48 17.9507 254.843 19.8596 256.601 22.1624V14.8905H267.054V64.9754H256.601V57.5217C254.843 59.8851 252.45 61.8546 249.42 63.4301C246.39 65.0057 242.936 65.7935 239.057 65.7935C234.755 65.7935 230.816 64.7027 227.241 62.5211C223.665 60.279 220.817 57.1884 218.696 53.2495C216.636 49.25 215.606 44.7354 215.606 39.7057ZM256.601 39.8875C256.601 36.4334 255.874 33.4337 254.419 30.8886C253.025 28.3434 251.177 26.4043 248.874 25.0711C246.572 23.7379 244.087 23.0713 241.421 23.0713C238.754 23.0713 236.27 23.7379 233.967 25.0711C231.664 26.3437 229.786 28.2525 228.331 30.7977C226.938 33.2822 226.241 36.2516 226.241 39.7057C226.241 43.1598 226.938 46.1898 228.331 48.7955C229.786 51.4013 231.664 53.401 233.967 54.7948C236.33 56.128 238.815 56.7946 241.421 56.7946C244.087 56.7946 246.572 56.128 248.874 54.7948C251.177 53.4616 253.025 51.5225 254.419 48.9773C255.874 46.3716 256.601 43.3416 256.601 39.8875Z" fill="#040404"/>
+        <path d="M288.3 22.1624C289.815 19.6172 291.815 17.6477 294.299 16.254C296.844 14.7996 299.844 14.0724 303.298 14.0724V24.7984H300.662C296.602 24.7984 293.511 25.8286 291.391 27.8889C289.33 29.9493 288.3 33.5246 288.3 38.6149V64.9754H277.938V14.8905H288.3V22.1624Z" fill="#040404"/>
+        <path d="M356 38.7058C356 40.5844 355.879 42.2811 355.636 43.7961H317.368C317.671 47.7956 319.156 51.0074 321.822 53.4313C324.489 55.8553 327.761 57.0672 331.639 57.0672C337.214 57.0672 341.153 54.7342 343.456 50.0681H354.636C353.122 54.6736 350.364 58.461 346.365 61.4304C342.426 64.3391 337.517 65.7935 331.639 65.7935C326.852 65.7935 322.549 64.733 318.732 62.612C314.975 60.4305 312.005 57.4005 309.824 53.5222C307.703 49.5833 306.642 45.0384 306.642 39.8875C306.642 34.7366 307.672 30.222 309.733 26.3437C311.854 22.4047 314.793 19.3748 318.55 17.2539C322.368 15.1329 326.731 14.0724 331.639 14.0724C336.366 14.0724 340.578 15.1026 344.274 17.163C347.971 19.2233 350.849 22.1321 352.909 25.8892C354.97 29.5857 356 33.8579 356 38.7058ZM345.183 35.4335C345.122 31.6158 343.759 28.5555 341.093 26.2528C338.426 23.95 335.124 22.7986 331.185 22.7986C327.609 22.7986 324.549 23.95 322.004 26.2528C319.459 28.4949 317.944 31.5552 317.459 35.4335H345.183Z" fill="#040404"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M38.784 8.41618C31.0791 -0.650221 17.4832 -1.75393 8.41683 5.95099C-1.04907 13.9954 -1.76843 28.3571 6.84626 37.3071L7.10442 37.5753C9.4996 40.0638 13.4585 40.1393 15.947 37.7442C18.4354 35.349 18.511 31.39 16.1158 28.9016L15.8576 28.6334C12.2444 24.8795 12.5461 18.8558 16.5164 15.4818C20.3191 12.2501 26.0216 12.713 29.2532 16.5157L34.6651 22.8839L44.1959 14.7843L38.784 8.41618Z" fill="#040404"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M48.3988 50.0428L67.3387 27.7562C70.4627 24.0801 70.0152 18.5676 66.3392 15.4435C62.6631 12.3195 57.1506 12.767 54.0266 16.4431L35.0866 38.7298C31.9626 42.4058 32.4101 47.9184 36.0861 51.0424C39.7622 54.1664 45.2747 53.7189 48.3988 50.0428ZM74.4387 5.91278C65.499 -1.6845 52.0931 -0.596207 44.4958 8.34354L25.5559 30.6302C17.9586 39.57 19.0469 52.9759 27.9866 60.5731C36.9263 68.1704 50.3323 67.0821 57.9295 58.1424L76.8695 35.8557C84.4667 26.916 83.3785 13.5101 74.4387 5.91278Z" fill="#040404"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M57.5401 29.9718L41.3124 10.893L25.0848 29.9718C17.3971 39.0102 18.4983 52.5642 27.5445 60.2453C31.5489 63.6455 36.4388 65.3249 41.3124 65.3568C46.1861 65.3249 51.076 63.6455 55.0804 60.2453C64.1266 52.5642 65.2278 39.0102 57.5401 29.9718ZM41.3124 52.7105C43.2946 52.6793 45.2524 51.9951 46.8844 50.6093C50.6042 47.4508 51.057 41.8774 47.8958 38.1608L41.3124 30.4207L34.7291 38.1608C31.5678 41.8774 32.0207 47.4508 35.7405 50.6093C37.3725 51.9951 39.3303 52.6793 41.3124 52.7105Z" fill="#040404"/>
+      </svg>
+    </div>
+    <button class="nav-cta">Termin buchen →</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <!-- Background photo + overlay -->
+  <div class="hero-bg"></div>
+
+  <!-- Top bar: logo + rating -->
+  <div class="hero-top" style="position:absolute;top:0;left:0;right:0;z-index:20;padding:32px 48px;display:flex;justify-content:space-between;align-items:center;">
+    <!-- White logo -->
+    <svg height="30" viewBox="0 0 356 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M128.211 52.0678H101.76L97.2148 64.9754H86.3979L109.032 1.71027H121.03L143.664 64.9754H132.756L128.211 52.0678ZM125.302 43.6143L115.031 14.2542L104.668 43.6143H125.302Z" fill="white"/>
+      <path d="M214.043 14.8905L198.499 64.9754H187.591L177.502 27.9798L167.412 64.9754H156.504L140.87 14.8905H151.414L161.867 55.1584L172.502 14.8905H183.319L193.5 54.9766L203.862 14.8905H214.043Z" fill="white"/>
+      <path d="M215.606 39.7057C215.606 34.676 216.636 30.222 218.696 26.3437C220.817 22.4653 223.665 19.4657 227.241 17.3447C230.877 15.1632 234.876 14.0724 239.239 14.0724C243.178 14.0724 246.602 14.8602 249.511 16.4358C252.48 17.9507 254.843 19.8596 256.601 22.1624V14.8905H267.054V64.9754H256.601V57.5217C254.843 59.8851 252.45 61.8546 249.42 63.4301C246.39 65.0057 242.936 65.7935 239.057 65.7935C234.755 65.7935 230.816 64.7027 227.241 62.5211C223.665 60.279 220.817 57.1884 218.696 53.2495C216.636 49.25 215.606 44.7354 215.606 39.7057ZM256.601 39.8875C256.601 36.4334 255.874 33.4337 254.419 30.8886C253.025 28.3434 251.177 26.4043 248.874 25.0711C246.572 23.7379 244.087 23.0713 241.421 23.0713C238.754 23.0713 236.27 23.7379 233.967 25.0711C231.664 26.3437 229.786 28.2525 228.331 30.7977C226.938 33.2822 226.241 36.2516 226.241 39.7057C226.241 43.1598 226.938 46.1898 228.331 48.7955C229.786 51.4013 231.664 53.401 233.967 54.7948C236.33 56.128 238.815 56.7946 241.421 56.7946C244.087 56.7946 246.572 56.128 248.874 54.7948C251.177 53.4616 253.025 51.5225 254.419 48.9773C255.874 46.3716 256.601 43.3416 256.601 39.8875Z" fill="white"/>
+      <path d="M288.3 22.1624C289.815 19.6172 291.815 17.6477 294.299 16.254C296.844 14.7996 299.844 14.0724 303.298 14.0724V24.7984H300.662C296.602 24.7984 293.511 25.8286 291.391 27.8889C289.33 29.9493 288.3 33.5246 288.3 38.6149V64.9754H277.938V14.8905H288.3V22.1624Z" fill="white"/>
+      <path d="M356 38.7058C356 40.5844 355.879 42.2811 355.636 43.7961H317.368C317.671 47.7956 319.156 51.0074 321.822 53.4313C324.489 55.8553 327.761 57.0672 331.639 57.0672C337.214 57.0672 341.153 54.7342 343.456 50.0681H354.636C353.122 54.6736 350.364 58.461 346.365 61.4304C342.426 64.3391 337.517 65.7935 331.639 65.7935C326.852 65.7935 322.549 64.733 318.732 62.612C314.975 60.4305 312.005 57.4005 309.824 53.5222C307.703 49.5833 306.642 45.0384 306.642 39.8875C306.642 34.7366 307.672 30.222 309.733 26.3437C311.854 22.4047 314.793 19.3748 318.55 17.2539C322.368 15.1329 326.731 14.0724 331.639 14.0724C336.366 14.0724 340.578 15.1026 344.274 17.163C347.971 19.2233 350.849 22.1321 352.909 25.8892C354.97 29.5857 356 33.8579 356 38.7058ZM345.183 35.4335C345.122 31.6158 343.759 28.5555 341.093 26.2528C338.426 23.95 335.124 22.7986 331.185 22.7986C327.609 22.7986 324.549 23.95 322.004 26.2528C319.459 28.4949 317.944 31.5552 317.459 35.4335H345.183Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M38.784 8.41618C31.0791 -0.650221 17.4832 -1.75393 8.41683 5.95099C-1.04907 13.9954 -1.76843 28.3571 6.84626 37.3071L7.10442 37.5753C9.4996 40.0638 13.4585 40.1393 15.947 37.7442C18.4354 35.349 18.511 31.39 16.1158 28.9016L15.8576 28.6334C12.2444 24.8795 12.5461 18.8558 16.5164 15.4818C20.3191 12.2501 26.0216 12.713 29.2532 16.5157L34.6651 22.8839L44.1959 14.7843L38.784 8.41618Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M48.3988 50.0428L67.3387 27.7562C70.4627 24.0801 70.0152 18.5676 66.3392 15.4435C62.6631 12.3195 57.1506 12.767 54.0266 16.4431L35.0866 38.7298C31.9626 42.4058 32.4101 47.9184 36.0861 51.0424C39.7622 54.1664 45.2747 53.7189 48.3988 50.0428ZM74.4387 5.91278C65.499 -1.6845 52.0931 -0.596207 44.4958 8.34354L25.5559 30.6302C17.9586 39.57 19.0469 52.9759 27.9866 60.5731C36.9263 68.1704 50.3323 67.0821 57.9295 58.1424L76.8695 35.8557C84.4667 26.916 83.3785 13.5101 74.4387 5.91278Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M57.5401 29.9718L41.3124 10.893L25.0848 29.9718C17.3971 39.0102 18.4983 52.5642 27.5445 60.2453C31.5489 63.6455 36.4388 65.3249 41.3124 65.3568C46.1861 65.3249 51.076 63.6455 55.0804 60.2453C64.1266 52.5642 65.2278 39.0102 57.5401 29.9718ZM41.3124 52.7105C43.2946 52.6793 45.2524 51.9951 46.8844 50.6093C50.6042 47.4508 51.057 41.8774 47.8958 38.1608L41.3124 30.4207L34.7291 38.1608C31.5678 41.8774 32.0207 47.4508 35.7405 50.6093C37.3725 51.9951 39.3303 52.6793 41.3124 52.7105Z" fill="white"/>
+    </svg>
+    <div class="hero-rating">
+      <div class="stars-row" style="display:flex;align-items:center;gap:8px;justify-content:flex-end;">
+        <span style="font-size:1.25rem;font-weight:700;color:#fff;">4.8</span>
+        <span style="font-size:1rem;color:#fff;letter-spacing:2px;">★★★★★</span>
+      </div>
+      <div style="font-size:0.8125rem;color:rgba(255,255,255,0.50);margin-top:3px;">Über 1.400 Kundenbewertungen</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Jetzt in [CITY]
+      </div>
+      <h1>Ein Bluttest.<br><em>100+ Antworten.</em><br>In [CITY].</h1>
+      <p class="hero-sub">Termin schon morgen. Ergebnisse in 2 Werktagen.</p>
+      <div class="hero-actions">
+        <button class="btn-primary">
+          <span>Termin buchen</span>
+          <svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <a href="#process" class="hero-link">Wie es funktioniert</a>
+      </div>
+    </div>
+
+    <!-- Glass result card -->
+    <div class="hero-visual">
+      <div class="hero-score-tag">106 Biomarker analysiert ✓</div>
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-zone">
+            <span class="zone-dot" style="background:#486EF6;"></span>
+            <span class="result-label">Hormone</span>
+          </div>
+          <span class="badge-ok">Im Bereich</span>
+        </div>
+        <div class="result-bar-bg">
+          <div class="result-bar-fill" style="width:84%;background:#6AF0B6;"></div>
+        </div>
+        <div class="result-meta"><span>Testosteron 14.2 nmol/L</span><span>Referenz 8–29</span></div>
+      </div>
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-zone">
+            <span class="zone-dot" style="background:#EF8DFF;"></span>
+            <span class="result-label">Vitamine</span>
+          </div>
+          <span class="badge-low">Niedrig</span>
+        </div>
+        <div class="result-bar-bg">
+          <div class="result-bar-fill" style="width:28%;background:#FFBE68;"></div>
+        </div>
+        <div class="result-meta"><span>Vitamin D 18 ng/mL</span><span>Referenz 30–100</span></div>
+      </div>
+      <div class="result-card">
+        <div class="result-header">
+          <div class="result-zone">
+            <span class="zone-dot" style="background:#02ADB8;"></span>
+            <span class="result-label">Leber</span>
+          </div>
+          <span class="badge-ok">Im Bereich</span>
+        </div>
+        <div class="result-bar-bg">
+          <div class="result-bar-fill" style="width:91%;background:#6AF0B6;"></div>
+        </div>
+        <div class="result-meta"><span>ALT 22 U/L</span><span>Referenz &lt;45</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<section class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item">
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Biomarker pro Test</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Werktage bis Ergebnis</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4.8★</div>
+      <div class="stat-label">Ø Kundenbewertung</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">38</div>
+      <div class="stat-label">Partner-Labore in DE</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT WE TEST ── -->
+<section>
+  <div class="container">
+    <p class="section-label">Was wir messen</p>
+    <h2 class="section-title">Dein Körper, vollständig analysiert.</h2>
+    <p class="section-sub">Wir messen neun Gesundheitsbereiche mit über 100 Biomarkern. Kein Wartezimmer, kein Rezept.</p>
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-illus" style="background:#FFECEC;">🩸</div>
+        <div class="zone-info">
+          <h3>Blut</h3>
+          <p>Blutbild, Eisen, Ferritin und Entzündungswerte.</p>
+          <div class="zone-count" style="color:#FFA7A7;">28 Biomarker</div>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-illus" style="background:#F5E8FA;">💜</div>
+        <div class="zone-info">
+          <h3>Herz</h3>
+          <p>Cholesterin, Triglyceride und kardiovaskuläre Marker.</p>
+          <div class="zone-count" style="color:#BE3CDE;">12 Biomarker</div>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-illus" style="background:#ECEEF9;">🔵</div>
+        <div class="zone-info">
+          <h3>Hormone</h3>
+          <p>Östrogen, Testosteron, Cortisol, Schilddrüse und mehr.</p>
+          <div class="zone-count" style="color:#486EF6;">18 Biomarker</div>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-illus" style="background:#E0F2FC;">🛡️</div>
+        <div class="zone-info">
+          <h3>Immunsystem</h3>
+          <p>Immunzellen, Antikörper und Infektionsparameter.</p>
+          <div class="zone-count" style="color:#90CDF3;">10 Biomarker</div>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-illus" style="background:#EDEAF8;">⚡</div>
+        <div class="zone-info">
+          <h3>Stoffwechsel</h3>
+          <p>Blutzucker, Insulin, Schilddrüse und metabolische Marker.</p>
+          <div class="zone-count" style="color:#A480F2;">14 Biomarker</div>
+        </div>
+      </div>
+      <div class="zone-card">
+        <div class="zone-illus" style="background:#F8E8FC;">🌸</div>
+        <div class="zone-info">
+          <h3>Vitamine & Mineralien</h3>
+          <p>Vitamin D, B12, Magnesium, Zink und weitere.</p>
+          <div class="zone-count" style="color:#EF8DFF;">24 Biomarker</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section class="process-section" id="process">
+  <div class="container">
+    <p class="section-label">Ablauf</p>
+    <h2 class="section-title">In drei Schritten zu deinen Werten.</h2>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Online buchen</h3>
+        <p>Wähle Termin und Standort in [CITY]. Verfügbarkeit meist ab morgen.</p>
+        <span class="step-detail">⏱ ~2 Minuten</span>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Blut abnehmen lassen</h3>
+        <p>In unserer Partnerpraxis in [CITY]. Kurze Blutentnahme am Arm.</p>
+        <span class="step-detail">📍 [PARTNER_NAME], [STREET]</span>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Ergebnisse in der App</h3>
+        <p>In 2 Werktagen: über 100 Werte, erklärt und eingeordnet, direkt in der Aware App.</p>
+        <span class="step-detail">⚡ 2–4 Werktage</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LOCATION ── -->
+<section>
+  <div class="container">
+    <p class="section-label">Standort</p>
+    <h2 class="section-title">Aware in [CITY].</h2>
+    <div class="location-grid">
+      <div class="location-info">
+        <h3>[PARTNER_NAME]</h3>
+        <ul class="location-details">
+          <li>
+            <span class="location-icon">📍</span>
+            <div>
+              <strong>[STREET], [ZIP] [CITY]</strong><br>
+              <span style="font-size:0.875rem;color:var(--secondary);">[X] Minuten vom [BAHNHOF]</span>
+            </div>
+          </li>
+          <li>
+            <span class="location-icon">🕐</span>
+            <div>
+              <strong>Mo–Fr 08:00 – 13:00 Uhr</strong><br>
+              <span style="font-size:0.875rem;color:var(--secondary);">Termine nur nach Online-Buchung</span>
+            </div>
+          </li>
+          <li>
+            <span class="location-icon">🚊</span>
+            <div>
+              <strong>Öffentliche Verkehrsmittel</strong><br>
+              <span style="font-size:0.875rem;color:var(--secondary);">[ÖPNV-HINWEIS]</span>
+            </div>
+          </li>
+          <li>
+            <span class="location-icon">🅿️</span>
+            <div>
+              <strong>Parken</strong><br>
+              <span style="font-size:0.875rem;color:var(--secondary);">[PARKHINWEIS]</span>
+            </div>
+          </li>
+        </ul>
+        <button class="btn-primary" style="margin-top:24px;">Termin in [CITY] buchen</button>
+      </div>
+      <div class="location-map" style="padding:24px;align-items:flex-start;">
+        <div class="map-placeholder-icon">🗺️</div>
+        <div style="font-weight:700;font-size:1rem;">[PARTNER_NAME]</div>
+        <div style="font-size:0.875rem;opacity:0.80;">[STREET], [CITY]</div>
+        <a href="https://maps.google.com" target="_blank" style="font-size:0.875rem;color:var(--purple) !important;font-weight:600;margin-top:6px;">In Google Maps öffnen →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section class="reviews-section">
+  <div class="container">
+    <div class="reviews-header">
+      <p class="section-label">Bewertungen</p>
+      <div class="reviews-overall">
+        <div class="reviews-score">4.8</div>
+        <div class="reviews-meta">
+          <span class="stars">★★★★★</span>
+          <span>aus über 1.400 Bewertungen</span>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Endlich mal verstehen, was im Blut wirklich los ist. Die Erklärungen in der App sind so viel besser als der Papierbefund vom Arzt."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar"><img src="../../assets/photos/DTS_First_Date_Marlen_Stahlhuth_Photos_ID4793.jpg" alt="Laura M." /></div>
+          <div>
+            <div class="reviewer-name">Laura M.</div>
+            <div class="reviewer-date">März 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Vitamin D war auf 14 – hätte ich nie gewusst ohne Aware. Termin war schnell, Ergebnis nach 2 Tagen. Top."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar"><img src="../../assets/photos/DTS_Tradition_Chris_Abatzis_Photos_ID9173.jpg" alt="Tobias K." /></div>
+          <div>
+            <div class="reviewer-name">Tobias K.</div>
+            <div class="reviewer-date">Februar 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">„Super einfach gebucht, die Praxis war sehr professionell. Die App ist wirklich gut gemacht – jeder Wert erklärt und mit Kontext."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar"><img src="../../assets/photos/DTS_Fitness_Allie_Lehman_Photos_ID1794.jpg" alt="Sarah K." /></div>
+          <div>
+            <div class="reviewer-name">Sarah K.</div>
+            <div class="reviewer-date">Januar 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APP ── -->
+<section class="app-section">
+  <div class="app-inner">
+    <div class="app-content">
+      <h2>Alle deine Werte. Eine App.</h2>
+      <p>Ergebnisse in der Aware App verstehen, Trends verfolgen und personalisierte Empfehlungen bekommen – wann immer du willst.</p>
+      <ul class="app-features">
+        <li>100+ Biomarker einfach erklärt</li>
+        <li>Vergleiche mit Referenzwerten und deiner Altersgruppe</li>
+        <li>Fortschritt über Zeit tracken</li>
+        <li>Personalisierte Empfehlungen basierend auf deinen Werten</li>
+        <li>Teile Ergebnisse mit deinem Arzt</li>
+      </ul>
+      <div class="app-badges">
+        <div class="app-badge">
+          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </div>
+        <div class="app-badge">
+          <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.64.24.99.2l12.6-12.6-3.37-3.37L3.18 23.76zm16.7-11.23L17.3 11l-1.63.94L17.3 13l2.61-1.5-.03.03zM3.54.25C3.22.43 3 .79 3 1.23v21.54c0 .44.22.8.54.98l.12.06 12.06-12.06v-.28L3.66.19l-.12.06zm9.09 10.12l-9.2 9.2V4.43l9.2 9.2v.74z"/></svg>
+          Google Play
+        </div>
+      </div>
+    </div>
+    <div class="app-visual">
+      <div class="app-screen">
+        <div class="app-screen-header">Deine Ergebnisse</div>
+        <div class="biomarker-row">
+          <span class="biomarker-zone-dot" style="background:#486EF6;"></span>
+          <span class="biomarker-name">Testosteron</span>
+          <span class="biomarker-value">14.2 nmol/L</span>
+          <span class="biomarker-status" style="background:#E0F9F0;color:#04A86B;">OK</span>
+        </div>
+        <div class="biomarker-row">
+          <span class="biomarker-zone-dot" style="background:#EF8DFF;"></span>
+          <span class="biomarker-name">Vitamin D</span>
+          <span class="biomarker-value">18 ng/mL</span>
+          <span class="biomarker-status" style="background:#FFF4E0;color:#B87800;">Niedrig</span>
+        </div>
+        <div class="biomarker-row">
+          <span class="biomarker-zone-dot" style="background:#FFA7A7;"></span>
+          <span class="biomarker-name">Ferritin</span>
+          <span class="biomarker-value">42 µg/L</span>
+          <span class="biomarker-status" style="background:#E0F9F0;color:#04A86B;">OK</span>
+        </div>
+        <div class="biomarker-row">
+          <span class="biomarker-zone-dot" style="background:#02ADB8;"></span>
+          <span class="biomarker-name">ALT (Leber)</span>
+          <span class="biomarker-value">22 U/L</span>
+          <span class="biomarker-status" style="background:#E0F9F0;color:#04A86B;">OK</span>
+        </div>
+        <div class="biomarker-row">
+          <span class="biomarker-zone-dot" style="background:#85DAC6;"></span>
+          <span class="biomarker-name">Magnesium</span>
+          <span class="biomarker-value">0.82 mmol/L</span>
+          <span class="biomarker-status" style="background:#E0F9F0;color:#04A86B;">OK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section>
+  <div class="container">
+    <p class="section-label" style="text-align:center;">FAQ</p>
+    <h2 class="section-title" style="text-align:center;">Häufige Fragen.</h2>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Was misst Aware genau?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Aware misst über 100 Biomarker aus neun Gesundheitsbereichen: Blut, Herz, Hormone, Immunsystem, Niere, Leber, Stoffwechsel, Mineralien und Vitamine. Jeder Wert wird von medizinischem Fachpersonal überprüft und in der App verständlich erklärt.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Brauche ich ein Rezept?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Nein. Du kannst deinen Termin direkt online buchen – ohne Überweisung oder Arztbesuch. Du gehst zur Partnerpraxis, gibst eine Blutprobe ab und erhältst deine Ergebnisse digital in der App.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Wann bekomme ich meine Ergebnisse?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Die meisten Ergebnisse sind innerhalb von 2–4 Werktagen nach der Blutabnahme in deiner App verfügbar. Du wirst per Push-Nachricht benachrichtigt, sobald sie bereit sind.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Wie genau sind die Ergebnisse?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Wir arbeiten mit ISO-zertifizierten Partnerlaboren, die dieselben Standards wie Krankenhauslabore verwenden. Alle Ergebnisse werden von qualifiziertem medizinischem Personal geprüft und eingeordnet.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Was kostet ein Bluttest bei Aware?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Wähle zwischen verschiedenen Paketen – von fokussierten Einzelpanels (z.B. Hormone oder Vitamine) bis hin zum vollständigen 100+-Biomarker-Test. Die Preise beginnen ab [PREIS]€. Mitglieder sparen bei jedem Test.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER CTA ── -->
+<section class="footer-cta">
+  <div class="container">
+    <p class="section-label" style="text-align:center;">Los geht's</p>
+    <h2>Versteh deinen Körper.<br><em>In [CITY].</em></h2>
+    <p>Termin morgen, Ergebnisse in 2 Werktagen. Kein Wartezimmer, kein Rezept.</p>
+    <button class="btn-primary" style="font-size:1rem;padding:16px 36px;margin:0 auto;">
+      Termin in [CITY] buchen →
+    </button>
+    <div class="footer-trust">
+      ★★★★★ &nbsp;·&nbsp; 4.8 von 5 &nbsp;·&nbsp; über 1.400 Bewertungen
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <!-- Aware wordmark white -->
+      <svg height="22" viewBox="0 0 356 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M128.211 52.0678H101.76L97.2148 64.9754H86.3979L109.032 1.71027H121.03L143.664 64.9754H132.756L128.211 52.0678ZM125.302 43.6143L115.031 14.2542L104.668 43.6143H125.302Z" fill="white"/>
+        <path d="M214.043 14.8905L198.499 64.9754H187.591L177.502 27.9798L167.412 64.9754H156.504L140.87 14.8905H151.414L161.867 55.1584L172.502 14.8905H183.319L193.5 54.9766L203.862 14.8905H214.043Z" fill="white"/>
+        <path d="M215.606 39.7057C215.606 34.676 216.636 30.222 218.696 26.3437C220.817 22.4653 223.665 19.4657 227.241 17.3447C230.877 15.1632 234.876 14.0724 239.239 14.0724C243.178 14.0724 246.602 14.8602 249.511 16.4358C252.48 17.9507 254.843 19.8596 256.601 22.1624V14.8905H267.054V64.9754H256.601V57.5217C254.843 59.8851 252.45 61.8546 249.42 63.4301C246.39 65.0057 242.936 65.7935 239.057 65.7935C234.755 65.7935 230.816 64.7027 227.241 62.5211C223.665 60.279 220.817 57.1884 218.696 53.2495C216.636 49.25 215.606 44.7354 215.606 39.7057ZM256.601 39.8875C256.601 36.4334 255.874 33.4337 254.419 30.8886C253.025 28.3434 251.177 26.4043 248.874 25.0711C246.572 23.7379 244.087 23.0713 241.421 23.0713C238.754 23.0713 236.27 23.7379 233.967 25.0711C231.664 26.3437 229.786 28.2525 228.331 30.7977C226.938 33.2822 226.241 36.2516 226.241 39.7057C226.241 43.1598 226.938 46.1898 228.331 48.7955C229.786 51.4013 231.664 53.401 233.967 54.7948C236.33 56.128 238.815 56.7946 241.421 56.7946C244.087 56.7946 246.572 56.128 248.874 54.7948C251.177 53.4616 253.025 51.5225 254.419 48.9773C255.874 46.3716 256.601 43.3416 256.601 39.8875Z" fill="white"/>
+        <path d="M288.3 22.1624C289.815 19.6172 291.815 17.6477 294.299 16.254C296.844 14.7996 299.844 14.0724 303.298 14.0724V24.7984H300.662C296.602 24.7984 293.511 25.8286 291.391 27.8889C289.33 29.9493 288.3 33.5246 288.3 38.6149V64.9754H277.938V14.8905H288.3V22.1624Z" fill="white"/>
+        <path d="M356 38.7058C356 40.5844 355.879 42.2811 355.636 43.7961H317.368C317.671 47.7956 319.156 51.0074 321.822 53.4313C324.489 55.8553 327.761 57.0672 331.639 57.0672C337.214 57.0672 341.153 54.7342 343.456 50.0681H354.636C353.122 54.6736 350.364 58.461 346.365 61.4304C342.426 64.3391 337.517 65.7935 331.639 65.7935C326.852 65.7935 322.549 64.733 318.732 62.612C314.975 60.4305 312.005 57.4005 309.824 53.5222C307.703 49.5833 306.642 45.0384 306.642 39.8875C306.642 34.7366 307.672 30.222 309.733 26.3437C311.854 22.4047 314.793 19.3748 318.55 17.2539C322.368 15.1329 326.731 14.0724 331.639 14.0724C336.366 14.0724 340.578 15.1026 344.274 17.163C347.971 19.2233 350.849 22.1321 352.909 25.8892C354.97 29.5857 356 33.8579 356 38.7058ZM345.183 35.4335C345.122 31.6158 343.759 28.5555 341.093 26.2528C338.426 23.95 335.124 22.7986 331.185 22.7986C327.609 22.7986 324.549 23.95 322.004 26.2528C319.459 28.4949 317.944 31.5552 317.459 35.4335H345.183Z" fill="white"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M38.784 8.41618C31.0791 -0.650221 17.4832 -1.75393 8.41683 5.95099C-1.04907 13.9954 -1.76843 28.3571 6.84626 37.3071L7.10442 37.5753C9.4996 40.0638 13.4585 40.1393 15.947 37.7442C18.4354 35.349 18.511 31.39 16.1158 28.9016L15.8576 28.6334C12.2444 24.8795 12.5461 18.8558 16.5164 15.4818C20.3191 12.2501 26.0216 12.713 29.2532 16.5157L34.6651 22.8839L44.1959 14.7843L38.784 8.41618Z" fill="white"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M48.3988 50.0428L67.3387 27.7562C70.4627 24.0801 70.0152 18.5676 66.3392 15.4435C62.6631 12.3195 57.1506 12.767 54.0266 16.4431L35.0866 38.7298C31.9626 42.4058 32.4101 47.9184 36.0861 51.0424C39.7622 54.1664 45.2747 53.7189 48.3988 50.0428ZM74.4387 5.91278C65.499 -1.6845 52.0931 -0.596207 44.4958 8.34354L25.5559 30.6302C17.9586 39.57 19.0469 52.9759 27.9866 60.5731C36.9263 68.1704 50.3323 67.0821 57.9295 58.1424L76.8695 35.8557C84.4667 26.916 83.3785 13.5101 74.4387 5.91278Z" fill="white"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M57.5401 29.9718L41.3124 10.893L25.0848 29.9718C17.3971 39.0102 18.4983 52.5642 27.5445 60.2453C31.5489 63.6455 36.4388 65.3249 41.3124 65.3568C46.1861 65.3249 51.076 63.6455 55.0804 60.2453C64.1266 52.5642 65.2278 39.0102 57.5401 29.9718ZM41.3124 52.7105C43.2946 52.6793 45.2524 51.9951 46.8844 50.6093C50.6042 47.4508 51.057 41.8774 47.8958 38.1608L41.3124 30.4207L34.7291 38.1608C31.5678 41.8774 32.0207 47.4508 35.7405 50.6093C37.3725 51.9951 39.3303 52.6793 41.3124 52.7105Z" fill="white"/>
+      </svg>
+    </div>
+    <nav class="footer-links">
+      <a href="#">Datenschutz</a>
+      <a href="#">Impressum</a>
+      <a href="#">AGB</a>
+      <a href="#">Alle Standorte</a>
+    </nav>
+    <div class="footer-copy">© 2026 Aware Health GmbH</div>
+  </div>
+</footer>
+
+</body>
+</html>
