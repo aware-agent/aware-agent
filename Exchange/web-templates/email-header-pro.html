@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Header — AwarePro Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; padding: 40px 16px; background: #F6F5FC; font-family: 'Inter', Arial, sans-serif; }
+    .preview-note { max-width: 600px; margin: 0 auto 20px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 10px 14px; font-size: 11px; color: #666; text-align: center; }
+
+    /* Gradient text for "Aware" */
+    .gradient-text {
+      background: linear-gradient(90deg, #BA83FA 0%, #9B8FFF 20%, #81B8FF 38%, #6AF0B6 56%, #FFBE68 76%, #FF88BD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+</head>
+<body>
+
+<div class="preview-note">📧 Preview — remove this bar in production</div>
+
+<!-- ═══════════════════════════════════════════
+     EMAIL HEADER — Welcome new AwarePro Member
+     600px wide · table-based · inline-style safe
+     ═══════════════════════════════════════════ -->
+<table width="600" cellpadding="0" cellspacing="0" border="0" role="presentation"
+  style="margin: 0 auto; width: 600px; border-radius: 24px; overflow: hidden; background: #000000; position: relative;">
+  <tr>
+    <td style="padding: 0; position: relative; overflow: hidden;">
+
+      <!-- Aurora glow at bottom (absolutely positioned layer via nested table trick) -->
+      <!-- We use a tall inner cell with bottom-gradient -->
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" role="presentation">
+        <tr>
+          <td style="
+            padding: 60px 40px 64px;
+            text-align: center;
+            background:
+              radial-gradient(ellipse 90% 50% at 50% 110%,
+                rgba(106,240,182,0.55) 0%,
+                rgba(129,184,255,0.40) 20%,
+                rgba(186,131,250,0.35) 40%,
+                rgba(255,136,189,0.25) 60%,
+                rgba(255,190,104,0.15) 75%,
+                rgba(0,0,0,0) 90%
+              ),
+              #000000;
+          ">
+
+            <!-- App Icon -->
+            <div style="margin-bottom: 28px;">
+              <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="margin: 0 auto;">
+                <tr>
+                  <td style="
+                    width: 72px;
+                    height: 72px;
+                    border-radius: 18px;
+                    background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
+                    border: 1px solid rgba(255,255,255,0.10);
+                    text-align: center;
+                    vertical-align: middle;
+                    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.6);
+                  ">
+                    <!-- Aware mark (white) inline SVG, scaled to ~36px -->
+                    <svg width="36" height="36" viewBox="0 0 83 66" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin: 18px auto 0;">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M38.784 8.41618C31.0791 -0.650221 17.4832 -1.75393 8.41683 5.95099C-1.04907 13.9954 -1.76843 28.3571 6.84626 37.3071L7.10442 37.5753C9.4996 40.0638 13.4585 40.1393 15.947 37.7442C18.4354 35.349 18.511 31.39 16.1158 28.9016L15.8576 28.6334C12.2444 24.8795 12.5461 18.8558 16.5164 15.4818C20.3191 12.2501 26.0216 12.713 29.2532 16.5157L34.6651 22.8839L44.1959 14.7843L38.784 8.41618Z" fill="white"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M48.3988 50.0428L67.3387 27.7562C70.4627 24.0801 70.0152 18.5676 66.3392 15.4435C62.6631 12.3195 57.1506 12.767 54.0266 16.4431L35.0866 38.7298C31.9626 42.4058 32.4101 47.9184 36.0861 51.0424C39.7622 54.1664 45.2747 53.7189 48.3988 50.0428ZM74.4387 5.91278C65.499 -1.6845 52.0931 -0.596207 44.4958 8.34354L25.5559 30.6302C17.9586 39.57 19.0469 52.9759 27.9866 60.5731C36.9263 68.1704 50.3323 67.0821 57.9295 58.1424L76.8695 35.8557C84.4667 26.916 83.3785 13.5101 74.4387 5.91278Z" fill="white"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M57.5401 29.9718L41.3124 10.893L25.0848 29.9718C17.3971 39.0102 18.4983 52.5642 27.5445 60.2453C31.5489 63.6455 36.4388 65.3249 41.3124 65.3568C46.1861 65.3249 51.076 63.6455 55.0804 60.2453C64.1266 52.5642 65.2278 39.0102 57.5401 29.9718ZM41.3124 52.7105C43.2946 52.6793 45.2524 51.9951 46.8844 50.6093C50.6042 47.4508 51.057 41.8774 47.8958 38.1608L41.3124 30.4207L34.7291 38.1608C31.5678 41.8774 32.0207 47.4508 35.7405 50.6093C37.3725 51.9951 39.3303 52.6793 41.3124 52.7105Z" fill="white"/>
+                    </svg>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- "Aware Pro" headline -->
+            <!-- Gradient text: inline SVG text trick for email compatibility -->
+            <!-- Fallback: white. For web preview we use CSS gradient-text -->
+            <h1 style="
+              margin: 0 0 12px 0;
+              font-family: 'Inter', Arial, sans-serif;
+              font-size: 42px;
+              font-weight: 800;
+              line-height: 1.0;
+              letter-spacing: -1.5px;
+              color: #ffffff;
+            ">
+              <span class="gradient-text">Aware</span>&nbsp;<span style="color: #ffffff;">Pro</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p style="
+              margin: 0;
+              font-family: 'Inter', Arial, sans-serif;
+              font-size: 17px;
+              font-weight: 400;
+              line-height: 1.5;
+              color: rgba(255,255,255,0.60);
+              letter-spacing: -0.1px;
+            ">
+              Your subscription is ready.
+            </p>
+
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+<!-- ═══════════════════════════════════════════ -->
+
+</body>
+</html>
