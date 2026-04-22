@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Aware – Deine Bluttest-Empfehlung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-black: #040404;
+      --color-secondary: #605E64;
+      --color-border: #CDC9DD;
+      --color-surface: #EFECF9;
+      --color-bg: #F6F5FC;
+      --color-magnesium: #A18AFF;
+      --color-iron: #81B8FF;
+      --color-zinc: #6AF0B6;
+      --color-calcium: #FF9CC7;
+      --color-potassium: #FFBE68;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --font: 'Inter', system-ui, sans-serif;
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font);
+      background: var(--color-bg);
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px 16px calc(48px + env(safe-area-inset-bottom));
+    }
+
+    .funnel-wrap {
+      width: 100%;
+      max-width: 460px;
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    /* ── Progress ── */
+    .progress-wrap {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .progress-bar {
+      flex: 1;
+      height: 3px;
+      background: var(--color-border);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--color-magnesium);
+      border-radius: var(--radius-full);
+      transition: width 0.4s ease;
+    }
+    .progress-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-secondary);
+      white-space: nowrap;
+    }
+
+    /* ── Back button ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      color: var(--color-secondary);
+      font-family: var(--font);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 14px;
+    }
+    .back-btn:hover { color: var(--color-black); }
+    .back-btn svg { flex-shrink: 0; }
+
+    /* ── Card ── */
+    .card {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 2px 16px rgba(4,4,4,0.07), 0 0 0 1px rgba(4,4,4,0.04);
+      overflow: hidden;
+    }
+
+    .card-hero {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 28px 24px 32px;
+    }
+
+    /* ── Screen ── */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── Typography ── */
+    .headline {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--color-black);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .subtext {
+      font-size: 0.9rem;
+      color: var(--color-secondary);
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    /* ── Choice options ── */
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .choice-btn {
+      width: 100%;
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-black);
+      transition: border-color 0.15s, background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .choice-btn:hover {
+      border-color: var(--color-magnesium);
+      background: #F2EEFF;
+    }
+    .choice-btn.selected {
+      border-color: var(--color-magnesium);
+      background: #EDE7FF;
+    }
+    .choice-btn .check {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--color-border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, border-color 0.15s;
+      margin-left: auto;
+    }
+    .choice-btn.selected .check {
+      background: var(--color-magnesium);
+      border-color: var(--color-magnesium);
+    }
+    .choice-btn .check svg { display: none; }
+    .choice-btn.selected .check svg { display: block; }
+
+    /* ── Gender cards ── */
+    .gender-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .gender-card {
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--color-black);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .gender-card:hover {
+      border-color: var(--color-magnesium);
+      background: #F2EEFF;
+    }
+    .gender-icon {
+      font-size: 2.25rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* ── Symptom grid ── */
+    .symptom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .symptom-btn {
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 14px 12px;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-black);
+      text-align: left;
+      line-height: 1.35;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .symptom-btn:hover {
+      border-color: var(--color-magnesium);
+      background: #F2EEFF;
+    }
+    .symptom-btn.selected {
+      border-color: var(--color-magnesium);
+      background: #EDE7FF;
+    }
+    .symptom-hint {
+      font-size: 0.8rem;
+      color: var(--color-secondary);
+      margin-top: -14px;
+      margin-bottom: 16px;
+    }
+
+    /* ── Education screen ── */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .edu-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .edu-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .edu-dot.blood    { background: #FFA7A7; }
+    .edu-dot.hormone  { background: #486EF6; }
+    .edu-dot.metab    { background: #A480F2; }
+    .edu-dot.immune   { background: #90CDF3; }
+    .edu-dot.organ    { background: #02ADB8; }
+    .edu-text strong {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-black);
+      margin-bottom: 2px;
+    }
+    .edu-text span {
+      font-size: 0.8125rem;
+      color: var(--color-secondary);
+      line-height: 1.45;
+    }
+
+    /* ── Summary screen ── */
+    .summary-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .summary-tag {
+      background: #EDE7FF;
+      color: #6B52CC;
+      border-radius: var(--radius-full);
+      padding: 5px 12px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+    .summary-info {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 0.875rem;
+      color: var(--color-secondary);
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    /* ── Email form ── */
+    .form-group {
+      margin-bottom: 12px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-black);
+      margin-bottom: 5px;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--color-bg);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 11px 14px;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      color: var(--color-black);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-input:focus { border-color: var(--color-magnesium); }
+    .form-input::placeholder { color: #B0ADB9; }
+    .form-input.error { border-color: #FF5C5C; }
+
+    .gdpr-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 20px;
+      margin-top: 4px;
+    }
+    .gdpr-row input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--color-magnesium);
+      cursor: pointer;
+    }
+    .gdpr-row label {
+      font-size: 0.8rem;
+      color: var(--color-secondary);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .gdpr-row a {
+      color: var(--color-magnesium);
+      text-decoration: none;
+    }
+    .form-error {
+      font-size: 0.8rem;
+      color: #D0321C;
+      margin-top: 4px;
+    }
+
+    /* ── Loading screen ── */
+    .loading-wrap {
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid var(--color-surface);
+      border-top-color: var(--color-magnesium);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 24px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      max-width: 240px;
+      margin: 24px auto 0;
+    }
+    .loading-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--color-secondary);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .loading-step.visible { opacity: 1; }
+    .loading-step .step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .loading-step.visible .step-dot { background: var(--color-magnesium); }
+
+    /* ── Buttons ── */
+    .btn {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: var(--radius-full);
+      border: none;
+      font-family: var(--font);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-primary {
+      background: var(--color-black);
+      color: #fff;
+    }
+    .btn-secondary-link {
+      background: transparent;
+      color: var(--color-secondary);
+      border: 1.5px solid var(--color-border);
+      margin-top: 10px;
+      font-size: 0.875rem;
+    }
+
+    /* ── Result screen ── */
+    .result-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: var(--radius-full);
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .result-tag.hormones  { background: #CBD4FC; color: #2247C2; }
+    .result-tag.metab     { background: #E4D9FB; color: #6B40D4; }
+    .result-tag.holistic  { background: #EDE7FF; color: #5C3DCC; }
+    .result-tag.sport     { background: #FFE6E5; color: #C4312A; }
+
+    .result-headline {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-black);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .result-subtext {
+      font-size: 0.875rem;
+      color: var(--color-secondary);
+      margin-bottom: 20px;
+      line-height: 1.55;
+    }
+
+    .package-card {
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 20px;
+      margin-bottom: 14px;
+      border: 1.5px solid var(--color-border);
+    }
+    .package-card.primary {
+      border-color: var(--color-magnesium);
+      background: #FAF8FF;
+    }
+    .package-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .package-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-black);
+    }
+    .package-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: var(--color-magnesium);
+      color: #fff;
+      border-radius: var(--radius-full);
+      padding: 3px 9px;
+      white-space: nowrap;
+    }
+    .package-markers {
+      font-size: 0.8125rem;
+      color: var(--color-secondary);
+      margin-bottom: 10px;
+    }
+    .package-includes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .pkg-tag {
+      background: var(--color-surface);
+      color: var(--color-secondary);
+      border-radius: var(--radius-full);
+      padding: 3px 10px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .package-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .price-main {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--color-black);
+    }
+    .price-pro {
+      font-size: 0.875rem;
+      color: var(--color-secondary);
+    }
+    .price-pro span {
+      color: var(--color-potassium);
+      font-weight: 600;
+    }
+
+    .aware-pro-box {
+      background: var(--color-black);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .aware-pro-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-potassium);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .aware-pro-headline {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .aware-pro-desc {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .aware-pro-price {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
+    }
+    .aware-pro-price strong {
+      color: var(--color-potassium);
+    }
+
+    .alt-packages {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--color-border);
+    }
+    .alt-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-secondary);
+      margin-bottom: 12px;
+    }
+    .alt-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+      gap: 10px;
+    }
+    .alt-item:last-child { border-bottom: none; }
+    .alt-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-black);
+    }
+    .alt-markers {
+      font-size: 0.8rem;
+      color: var(--color-secondary);
+    }
+    .alt-price {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--color-black);
+      white-space: nowrap;
+    }
+    .alt-link {
+      font-size: 0.8rem;
+      color: var(--color-magnesium);
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .alt-link:hover { text-decoration: underline; }
+
+    .trust-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      font-size: 0.8rem;
+      color: var(--color-secondary);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .trust-item svg { flex-shrink: 0; }
+
+    /* Util */
+    .mt-24 { margin-top: 24px; }
+    .mt-16 { margin-top: 16px; }
+  </style>
+</head>
+<body>
+<div class="funnel-wrap">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <svg width="90" height="17" viewBox="0 0 356 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M128.211 52.0678H101.76L97.2148 64.9754H86.3979L109.032 1.71027H121.03L143.664 64.9754H132.756L128.211 52.0678ZM125.302 43.6143L115.031 14.2542L104.668 43.6143H125.302Z" fill="#040404"/>
+      <path d="M214.043 14.8905L198.499 64.9754H187.591L177.502 27.9798L167.412 64.9754H156.504L140.87 14.8905H151.414L161.867 55.1584L172.502 14.8905H183.319L193.5 54.9766L203.862 14.8905H214.043Z" fill="#040404"/>
+      <path d="M215.606 39.7057C215.606 34.676 216.636 30.222 218.696 26.3437C220.817 22.4653 223.665 19.4657 227.241 17.3447C230.877 15.1632 234.876 14.0724 239.239 14.0724C243.178 14.0724 246.602 14.8602 249.511 16.4358C252.48 17.9507 254.843 19.8596 256.601 22.1624V14.8905H267.054V64.9754H256.601V57.5217C254.843 59.8851 252.45 61.8546 249.42 63.4301C246.39 65.0057 242.936 65.7935 239.057 65.7935C234.755 65.7935 230.816 64.7027 227.241 62.5211C223.665 60.279 220.817 57.1884 218.696 53.2495C216.636 49.25 215.606 44.7354 215.606 39.7057ZM256.601 39.8875C256.601 36.4334 255.874 33.4337 254.419 30.8886C253.025 28.3434 251.177 26.4043 248.874 25.0711C246.572 23.7379 244.087 23.0713 241.421 23.0713C238.754 23.0713 236.27 23.7379 233.967 25.0711C231.664 26.3437 229.786 28.2525 228.331 30.7977C226.938 33.2822 226.241 36.2516 226.241 39.7057C226.241 43.1598 226.938 46.1898 228.331 48.7955C229.786 51.4013 231.664 53.401 233.967 54.7948C236.33 56.128 238.815 56.7946 241.421 56.7946C244.087 56.7946 246.572 56.128 248.874 54.7948C251.177 53.4616 253.025 51.5225 254.419 48.9773C255.874 46.3716 256.601 43.3416 256.601 39.8875Z" fill="#040404"/>
+      <path d="M288.3 22.1624C289.815 19.6172 291.815 17.6477 294.299 16.254C296.844 14.7996 299.844 14.0724 303.298 14.0724V24.7984H300.662C296.602 24.7984 293.511 25.8286 291.391 27.8889C289.33 29.9493 288.3 33.5246 288.3 38.6149V64.9754H277.938V14.8905H288.3V22.1624Z" fill="#040404"/>
+      <path d="M356 38.7058C356 40.5844 355.879 42.2811 355.636 43.7961H317.368C317.671 47.7956 319.156 51.0074 321.822 53.4313C324.489 55.8553 327.761 57.0672 331.639 57.0672C337.214 57.0672 341.153 54.7342 343.456 50.0681H354.636C353.122 54.6736 350.364 58.461 346.365 61.4304C342.426 64.3391 337.517 65.7935 331.639 65.7935C326.852 65.7935 322.549 64.733 318.732 62.612C314.975 60.4305 312.005 57.4005 309.824 53.5222C307.703 49.5833 306.642 45.0384 306.642 39.8875C306.642 34.7366 307.672 30.222 309.733 26.3437C311.854 22.4047 314.793 19.3748 318.55 17.2539C322.368 15.1329 326.731 14.0724 331.639 14.0724C336.366 14.0724 340.578 15.1026 344.274 17.163C347.971 19.2233 350.849 22.1321 352.909 25.8892C354.97 29.5857 356 33.8579 356 38.7058ZM345.183 35.4335C345.122 31.6158 343.759 28.5555 341.093 26.2528C338.426 23.95 335.124 22.7986 331.185 22.7986C327.609 22.7986 324.549 23.95 322.004 26.2528C319.459 28.4949 317.944 31.5552 317.459 35.4335H345.183Z" fill="#040404"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M38.784 8.41618C31.0791 -0.650221 17.4832 -1.75393 8.41683 5.95099C-1.04907 13.9954 -1.76843 28.3571 6.84626 37.3071L7.10442 37.5753C9.4996 40.0638 13.4585 40.1393 15.947 37.7442C18.4354 35.349 18.511 31.39 16.1158 28.9016L15.8576 28.6334C12.2444 24.8795 12.5461 18.8558 16.5164 15.4818C20.3191 12.2501 26.0216 12.713 29.2532 16.5157L34.6651 22.8839L44.1959 14.7843L38.784 8.41618Z" fill="#040404"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M48.3988 50.0428L67.3387 27.7562C70.4627 24.0801 70.0152 18.5676 66.3392 15.4435C62.6631 12.3195 57.1506 12.767 54.0266 16.4431L35.0866 38.7298C31.9626 42.4058 32.4101 47.9184 36.0861 51.0424C39.7622 54.1664 45.2747 53.7189 48.3988 50.0428ZM74.4387 5.91278C65.499 -1.6845 52.0931 -0.596207 44.4958 8.34354L25.5559 30.6302C17.9586 39.57 19.0469 52.9759 27.9866 60.5731C36.9263 68.1704 50.3323 67.0821 57.9295 58.1424L76.8695 35.8557C84.4667 26.916 83.3785 13.5101 74.4387 5.91278Z" fill="#040404"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M57.5401 29.9718L41.3124 10.893L25.0848 29.9718C17.3971 39.0102 18.4983 52.5642 27.5445 60.2453C31.5489 63.6455 36.4388 65.3249 41.3124 65.3568C46.1861 65.3249 51.076 63.6455 55.0804 60.2453C64.1266 52.5642 65.2278 39.0102 57.5401 29.9718ZM41.3124 52.7105C43.2946 52.6793 45.2524 51.9951 46.8844 50.6093C50.6042 47.4508 51.057 41.8774 47.8958 38.1608L41.3124 30.4207L34.7291 38.1608C31.5678 41.8774 32.0207 47.4508 35.7405 50.6093C37.3725 51.9951 39.3303 52.6793 41.3124 52.7105Z" fill="#040404"/>
+    </svg>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 1 — INTRO
+  ══════════════════════════════ -->
+  <div class="screen active" id="screen-intro">
+    <div class="card">
+      <div class="card-body" style="padding-top: 36px; padding-bottom: 36px; text-align: center;">
+        <p style="font-size:0.8125rem; font-weight:600; color:var(--color-magnesium); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:14px;">Persönliche Empfehlung</p>
+        <h1 class="headline" style="font-size:1.5rem; text-align:center; margin-bottom:12px;">Was steckt wirklich hinter deinen Symptomen?</h1>
+        <p class="subtext" style="text-align:center; margin-bottom:28px;">In 2 Minuten erhältst du eine personalisierte Bluttest-Empfehlung, die auf deine Situation zugeschnitten ist.</p>
+        <button class="btn btn-primary" onclick="goTo('screen-gender')">Jetzt starten</button>
+        <div class="trust-row" style="margin-top:20px;">
+          <div class="trust-item">
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.5" stroke="#A18AFF"/><path d="M4.5 7l2 2 3-3" stroke="#A18AFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Kostenlos
+          </div>
+          <div class="trust-item">
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.5" stroke="#A18AFF"/><path d="M4.5 7l2 2 3-3" stroke="#A18AFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Keine E-Mail nötig
+          </div>
+          <div class="trust-item">
+            <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.5" stroke="#A18AFF"/><path d="M4.5 7l2 2 3-3" stroke="#A18AFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            2 Minuten
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 2 — GESCHLECHT
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-gender">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:14%"></div></div>
+      <span class="progress-label">1 / 7</span>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="headline">Für wen suchst du die Empfehlung?</h2>
+        <p class="subtext">Das hilft uns, die richtigen Biomarker zu empfehlen.</p>
+        <div class="gender-grid">
+          <button class="gender-card" onclick="selectGender('female')">
+            <span class="gender-icon">&#9792;&#65039;</span>
+            Frau
+          </button>
+          <button class="gender-card" onclick="selectGender('male')">
+            <span class="gender-icon">&#9794;&#65039;</span>
+            Mann
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 3 — SYMPTOME
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-symptoms">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:28%"></div></div>
+      <span class="progress-label">2 / 7</span>
+    </div>
+    <button class="back-btn" onclick="goBack('screen-gender')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Zurück
+    </button>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="headline">Was beschäftigt dich am meisten?</h2>
+        <p class="subtext">Wähle bis zu 3 Symptome aus.</p>
+        <p class="symptom-hint" id="symptom-hint"></p>
+        <div class="symptom-grid" id="symptom-grid">
+          <button class="symptom-btn" data-value="energie" onclick="toggleSymptom(this)">Energie &amp; Müdigkeit</button>
+          <button class="symptom-btn" data-value="schlaf" onclick="toggleSymptom(this)">Schlafprobleme</button>
+          <button class="symptom-btn" data-value="gewicht" onclick="toggleSymptom(this)">Gewicht &amp; Stoffwechsel</button>
+          <button class="symptom-btn" data-value="stimmung" onclick="toggleSymptom(this)">Stimmungsschwankungen</button>
+          <button class="symptom-btn" data-value="hormone" id="symptom-hormone" onclick="toggleSymptom(this)">Hormonelle Beschwerden</button>
+          <button class="symptom-btn" data-value="sport" onclick="toggleSymptom(this)">Leistung &amp; Regeneration</button>
+          <button class="symptom-btn" data-value="stress" onclick="toggleSymptom(this)">Stress &amp; Cortisol</button>
+          <button class="symptom-btn" data-value="allgemein" onclick="toggleSymptom(this)">Allgemeines Wohlbefinden</button>
+        </div>
+        <div class="mt-24">
+          <button class="btn btn-primary" id="symptom-next-btn" onclick="goTo('screen-goal')" disabled>Weiter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 4 — ZIEL
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-goal">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:43%"></div></div>
+      <span class="progress-label">3 / 7</span>
+    </div>
+    <button class="back-btn" onclick="goBack('screen-symptoms')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Zurück
+    </button>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="headline">Was ist dein wichtigstes Ziel?</h2>
+        <p class="subtext">Wähle das, was dir heute am meisten bedeutet.</p>
+        <div class="choices">
+          <button class="choice-btn" data-value="energie" onclick="selectGoal(this)">
+            Herausfinden, was meine Energie kostet
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="hormone" onclick="selectGoal(this)">
+            Meine Hormone besser verstehen
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="gewicht" onclick="selectGoal(this)">
+            Gewicht und Stoffwechsel optimieren
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="sport" onclick="selectGoal(this)">
+            Sportliche Leistung verbessern
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="check" onclick="selectGoal(this)">
+            Umfassenden Gesundheitscheck machen
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="vorsorge" onclick="selectGoal(this)">
+            Langfristig vorsorgen und Risiken erkennen
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 5 — MOTIVATION
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-motivation">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:57%"></div></div>
+      <span class="progress-label">4 / 7</span>
+    </div>
+    <button class="back-btn" onclick="goBack('screen-goal')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Zurück
+    </button>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="headline">Was bringt dich jetzt dazu?</h2>
+        <p class="subtext">Hilf uns, deine Situation besser zu verstehen.</p>
+        <div class="choices">
+          <button class="choice-btn" data-value="symptome" onclick="selectMotivation(this)">
+            Ich fühle mich seit Wochen nicht wie ich selbst
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="arzt" onclick="selectMotivation(this)">
+            Mein Arzt hat mir empfohlen, meine Werte zu prüfen
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="wissen" onclick="selectMotivation(this)">
+            Ich will endlich wissen, was hinter meinen Symptomen steckt
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="aktiv" onclick="selectMotivation(this)">
+            Ich nehme meine Gesundheit aktiv in die Hand
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="start" onclick="selectMotivation(this)">
+            Ich starte einen neuen Lebensabschnitt
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 6 — EDUKATION
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-edu">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:71%"></div></div>
+      <span class="progress-label">5 / 7</span>
+    </div>
+    <button class="back-btn" onclick="goBack('screen-motivation')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Zurück
+    </button>
+    <div class="card">
+      <div class="card-body">
+        <p style="font-size:0.8125rem; font-weight:600; color:var(--color-magnesium); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:10px;">Gut zu wissen</p>
+        <h2 class="headline">So lesen Blutmarker dein Körpersystem</h2>
+        <p class="subtext">Dein Blut spiegelt 5 Körpersysteme wider. Viele Symptome haben eine gemeinsame Ursache, die sich früh im Blutbild zeigt.</p>
+        <div class="edu-list">
+          <div class="edu-item">
+            <div class="edu-dot blood">1</div>
+            <div class="edu-text">
+              <strong>Energie &amp; Blutbild</strong>
+              <span>Hämoglobin, Eisen, Ferritin, B12 und Folsäure bestimmen, wie gut deine Zellen mit Sauerstoff versorgt werden.</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot hormone">2</div>
+            <div class="edu-text">
+              <strong>Hormone &amp; Schilddrüse</strong>
+              <span>Testosteron, Östradiol, TSH und DHEA-S steuern Stimmung, Libido, Schlaf und Körperzusammensetzung.</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot metab">3</div>
+            <div class="edu-text">
+              <strong>Stoffwechsel &amp; Blutzucker</strong>
+              <span>Insulin, HbA1c, Lipide und Triglyceride zeigen, wie gut dein Körper Energie verwertet.</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot immune">4</div>
+            <div class="edu-text">
+              <strong>Immunsystem &amp; Entzündung</strong>
+              <span>CRP, Vitamin D und Zink regulieren deine Abwehr und beeinflussen, wie schnell du dich erholst.</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot organ">5</div>
+            <div class="edu-text">
+              <strong>Leber &amp; Niere</strong>
+              <span>GOT, GPT und Kreatinin messen, wie gut deine Entgiftungsorgane arbeiten.</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="goTo('screen-depth')">Weiter zu meiner Empfehlung</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 7 — TIEFE
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-depth">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:86%"></div></div>
+      <span class="progress-label">6 / 7</span>
+    </div>
+    <button class="back-btn" onclick="goBack('screen-edu')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Zurück
+    </button>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="headline">Welche Art von Einblick suchst du?</h2>
+        <p class="subtext">Das beeinflusst, welches Panel wir dir empfehlen.</p>
+        <div class="choices">
+          <button class="choice-btn" data-value="ziel" onclick="selectDepth(this)">
+            Gezielter Check für mein konkretes Problem
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="ueberblick" onclick="selectDepth(this)">
+            Umfassender Überblick über meine Gesundheit
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+          <button class="choice-btn" data-value="komplett" onclick="selectDepth(this)">
+            Komplettanalyse aller wichtigen Körpersysteme
+            <div class="check"><svg width="11" height="9" fill="none" viewBox="0 0 11 9"><path d="M1 4l3 3.5 6-7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 8 — EMAIL GATE
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-email">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" style="width:93%"></div></div>
+      <span class="progress-label">7 / 7</span>
+    </div>
+    <button class="back-btn" onclick="goBack('screen-depth')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Zurück
+    </button>
+    <div class="card">
+      <div class="card-body">
+        <p style="font-size:0.8125rem; font-weight:600; color:var(--color-magnesium); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:10px;">Fast geschafft</p>
+        <h2 class="headline">Deine persönliche Empfehlung ist bereit.</h2>
+        <p class="subtext">Gib deine E-Mail-Adresse ein, um dein Ergebnis zu sehen und später wieder darauf zugreifen zu können.</p>
+        <div class="form-group">
+          <label class="form-label" for="input-name">Vorname</label>
+          <input class="form-input" id="input-name" type="text" placeholder="Dein Vorname" autocomplete="given-name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="input-email">E-Mail-Adresse</label>
+          <input class="form-input" id="input-email" type="email" placeholder="deine@email.de" autocomplete="email" />
+          <div class="form-error" id="email-error" style="display:none;">Bitte gib eine gültige E-Mail-Adresse ein.</div>
+        </div>
+        <div class="gdpr-row">
+          <input type="checkbox" id="newsletter-check" />
+          <label for="newsletter-check">
+            Ich möchte Gesundheitstipps und Angebote von Aware erhalten. Die Einwilligung kann jederzeit widerrufen werden.
+            <a href="https://www.aware.app/de/datenschutz" target="_blank">Datenschutzerklärung</a>
+          </label>
+        </div>
+        <button class="btn btn-primary" onclick="submitEmail()">Meine Empfehlung anzeigen</button>
+        <button class="btn btn-secondary-link" onclick="skipEmail()">Ohne E-Mail fortfahren</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 9 — LOADING
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-loading">
+    <div class="card">
+      <div class="loading-wrap">
+        <div class="spinner"></div>
+        <p style="font-size:1rem; font-weight:700; color:var(--color-black);">Analyse läuft...</p>
+        <p style="font-size:0.875rem; color:var(--color-secondary); margin-top:6px;">Wir gleichen deine Angaben mit über 100 Biomarkern ab.</p>
+        <div class="loading-steps" id="loading-steps">
+          <div class="loading-step" id="lstep-1">
+            <div class="step-dot"></div>
+            <span>Symptomanalyse wird durchgeführt</span>
+          </div>
+          <div class="loading-step" id="lstep-2">
+            <div class="step-dot"></div>
+            <span>Biomarker werden zugeordnet</span>
+          </div>
+          <div class="loading-step" id="lstep-3">
+            <div class="step-dot"></div>
+            <span>Empfehlung wird personalisiert</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SCREEN 10 — RESULT
+  ══════════════════════════════ -->
+  <div class="screen" id="screen-result">
+    <div class="card">
+      <div class="card-body" id="result-body">
+        <!-- Dynamically filled by JS -->
+      </div>
+    </div>
+  </div>
+
+</div><!-- /funnel-wrap -->
+
+<script>
+  // ── State ──
+  const state = {
+    gender: null,
+    symptoms: [],
+    goal: null,
+    motivation: null,
+    depth: null,
+    name: '',
+    email: ''
+  };
+
+  // ── Package data ──
+  const PACKAGES = {
+    fh: {
+      name: 'Female Hormone Panel',
+      markers: 18,
+      price: 139,
+      sku: 'FH',
+      tag: 'hormones',
+      tagLabel: 'Hormone',
+      includes: ['Östradiol', 'Progesteron', 'LH & FSH', 'Testosteron', 'TSH', 'SHBG', 'DHEA-S'],
+      desc: 'Umfassender Hormonblick für Frauen: Zyklus, Schilddrüse, Cortisol und mehr – in einer Blutabnahme.',
+      proPrice: 111
+    },
+    mh: {
+      name: 'Male Hormone Panel',
+      markers: 22,
+      price: 149,
+      sku: 'MH',
+      tag: 'hormones',
+      tagLabel: 'Hormone',
+      includes: ['Testosteron (gesamt & frei)', 'LH & FSH', 'Östradiol', 'TSH', 'DHEA-S', 'SHBG', 'Cortisol'],
+      desc: 'Der vollständige Hormonstatus für Männer: Energie, Libido, Muskelaufbau und Stresshormon in einer Messung.',
+      proPrice: 119
+    },
+    metabolism_plus: {
+      name: 'Metabolism Plus',
+      markers: 45,
+      price: 269,
+      sku: 'MP',
+      tag: 'metab',
+      tagLabel: 'Stoffwechsel',
+      includes: ['Lipidprofil', 'Insulinresistenz', 'Schilddrüse', 'Apo B', 'Vitamine', 'Omega-3', 'Cortisol'],
+      desc: 'Alles, was du über deinen Stoffwechsel wissen musst – von Blutzucker über Fettstoffwechsel bis Vitaminversorgung.',
+      proPrice: 215
+    },
+    metabolism_adv: {
+      name: 'Metabolism Advanced',
+      markers: 64,
+      price: 359,
+      sku: 'MA',
+      tag: 'metab',
+      tagLabel: 'Stoffwechsel',
+      includes: ['Alle Marker aus Plus', 'Hormone (Testosteron, DHEA-S)', 'Adiponectin & Leptin', 'B-Vitamine', 'Spurenelemente'],
+      desc: 'Der umfassendste Stoffwechsel-Check – inklusive Hormonprofil und Entzündungsmarkern.',
+      proPrice: 287
+    },
+    sports: {
+      name: 'Sports Package',
+      markers: 30,
+      price: 199,
+      sku: 'SP',
+      tag: 'sport',
+      tagLabel: 'Sport & Performance',
+      includes: ['Großes Blutbild', 'Eisen-Status', 'Vitamine D & B12', 'Omega-3 Index', 'CRP', 'Magnesium'],
+      desc: 'Entwickelt für aktive Menschen: Regeneration, Versorgung und Leistungsfähigkeit messbar machen.',
+      proPrice: 159
+    },
+    holistic_core: {
+      name: 'Holistic Core',
+      markers: 51,
+      price: 299,
+      sku: 'HC',
+      tag: 'holistic',
+      tagLabel: 'Ganzheitlich',
+      includes: ['Lipide & Leber', 'Großes Blutbild', 'Stoffwechsel', 'Schilddrüse', 'Entzündung', 'Apo B'],
+      desc: 'Ein solider Rundum-Check für alle, die verstehen wollen, wo sie gesundheitlich stehen.',
+      proPrice: 239
+    },
+    holistic_adv: {
+      name: 'Holistic Advanced',
+      markers: 99,
+      price: 499,
+      sku: 'HA',
+      tag: 'holistic',
+      tagLabel: 'Ganzheitlich',
+      includes: ['Alle Organe', 'Großes Blutbild', 'Hormone', 'Fettsäureprofil (18)', 'Spurenelemente', 'Leber-Fibrose'],
+      desc: 'Das umfassendste Panel im Sortiment: 99 Biomarker decken jeden Winkel deiner Gesundheit ab.',
+      proPrice: 399
+    }
+  };
+
+  // ── Routing logic ──
+  function getRecommendation() {
+    const { gender, goal, depth } = state;
+    let primary, alts;
+
+    if (goal === 'hormone') {
+      primary = gender === 'female' ? 'fh' : 'mh';
+      if (depth === 'komplett') {
+        primary = gender === 'female' ? 'metabolism_adv' : 'metabolism_adv';
+        alts = [gender === 'female' ? 'fh' : 'mh', 'holistic_core'];
+      } else {
+        alts = depth === 'ueberblick'
+          ? ['holistic_core', 'metabolism_plus']
+          : ['holistic_core', gender === 'female' ? 'metabolism_plus' : 'metabolism_plus'];
+      }
+    } else if (goal === 'gewicht') {
+      primary = depth === 'komplett' ? 'metabolism_adv' : 'metabolism_plus';
+      alts = ['holistic_core', 'holistic_adv'];
+    } else if (goal === 'sport') {
+      primary = depth === 'komplett' ? 'metabolism_plus' : 'sports';
+      alts = ['holistic_core', gender === 'female' ? 'fh' : 'mh'];
+    } else if (goal === 'vorsorge') {
+      primary = depth === 'komplett' ? 'holistic_adv' : 'holistic_core';
+      alts = ['metabolism_plus', depth === 'komplett' ? 'holistic_core' : 'holistic_adv'];
+    } else { // energie, check
+      if (depth === 'komplett') {
+        primary = 'holistic_adv';
+        alts = ['holistic_core', 'metabolism_plus'];
+      } else if (depth === 'ueberblick') {
+        primary = 'holistic_core';
+        alts = ['metabolism_plus', gender === 'female' ? 'fh' : 'mh'];
+      } else {
+        primary = gender === 'female' ? 'fh' : 'mh';
+        alts = ['holistic_core', 'sports'];
+      }
+    }
+    return { primary, alts };
+  }
+
+  // ── Render result ──
+  function renderResult() {
+    const { primary, alts } = getRecommendation();
+    const pkg = PACKAGES[primary];
+    const firstName = state.name ? state.name.trim().split(' ')[0] : '';
+    const greeting = firstName ? `${firstName}, ` : '';
+
+    const shopBase = 'https://www.aware.app/de/shop/berlin-mitte/';
+
+    const tagColors = {
+      hormones: 'hormones',
+      metab: 'metab',
+      holistic: 'holistic',
+      sport: 'sport'
+    };
+
+    const altHTML = alts.map(k => {
+      const p = PACKAGES[k];
+      return `
+        <div class="alt-item">
+          <div>
+            <div class="alt-name">${p.name}</div>
+            <div class="alt-markers">${p.markers} Biomarker</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="alt-price">€${p.price}</span>
+            <a class="alt-link" href="${shopBase}${p.sku}" target="_blank">Ansehen</a>
+          </div>
+        </div>`;
+    }).join('');
+
+    const includesHTML = pkg.includes.map(i => `<span class="pkg-tag">${i}</span>`).join('');
+
+    document.getElementById('result-body').innerHTML = `
+      <div class="result-tag ${tagColors[pkg.tag] || 'holistic'}">${pkg.tagLabel}</div>
+      <h2 class="result-headline">${greeting}deine Empfehlung: ${pkg.name}</h2>
+      <p class="result-subtext">${pkg.desc}</p>
+
+      <div class="package-card primary">
+        <div class="package-header">
+          <span class="package-name">${pkg.name}</span>
+          <span class="package-badge">Empfohlen</span>
+        </div>
+        <p class="package-markers">${pkg.markers} Biomarker analysiert</p>
+        <div class="package-includes">${includesHTML}</div>
+        <div class="package-price-row">
+          <span class="price-main">€${pkg.price}</span>
+          <span class="price-pro">oder <span>€${pkg.proPrice}</span> mit AwarePro</span>
+        </div>
+        <a href="${shopBase}${pkg.sku}" target="_blank" style="display:block;">
+          <button class="btn btn-primary">Jetzt buchen</button>
+        </a>
+      </div>
+
+      <div class="aware-pro-box">
+        <div class="aware-pro-label">AwarePro</div>
+        <div class="aware-pro-headline">Spare auf jeden Test, für immer.</div>
+        <div class="aware-pro-desc">AwarePro ist Awares Mitgliedschaft: Du erhältst 20% Rabatt auf alle Bluttests, unbegrenzte Befundhistorie und prioritären Zugang zu neuen Features.</div>
+        <div class="aware-pro-price">Ab <strong>€9,99 / Monat</strong> · Jederzeit kündbar</div>
+      </div>
+
+      <div class="alt-packages">
+        <p class="alt-label">Weitere Optionen</p>
+        ${altHTML}
+      </div>
+
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.5" stroke="#A18AFF"/><path d="M4.5 7l2 2 3-3" stroke="#A18AFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Ergebnisse in 1–2 Werktagen
+        </div>
+        <div class="trust-item">
+          <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.5" stroke="#A18AFF"/><path d="M4.5 7l2 2 3-3" stroke="#A18AFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          40 Standorte in Deutschland
+        </div>
+      </div>
+    `;
+  }
+
+  // ── Navigation ──
+  function goTo(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goBack(screenId) {
+    goTo(screenId);
+  }
+
+  // ── Gender ──
+  function selectGender(value) {
+    state.gender = value;
+    // Show/hide PMS option for males
+    const hormoneBtn = document.getElementById('symptom-hormone');
+    if (value === 'male') {
+      hormoneBtn.textContent = 'Hormonelle Beschwerden';
+    } else {
+      hormoneBtn.textContent = 'PMS & Zyklus';
+    }
+    goTo('screen-symptoms');
+  }
+
+  // ── Symptoms ──
+  function toggleSymptom(btn) {
+    const MAX = 3;
+    if (btn.classList.contains('selected')) {
+      btn.classList.remove('selected');
+      state.symptoms = state.symptoms.filter(v => v !== btn.dataset.value);
+    } else {
+      if (state.symptoms.length >= MAX) return;
+      btn.classList.add('selected');
+      state.symptoms.push(btn.dataset.value);
+    }
+    updateSymptomHint();
+    document.getElementById('symptom-next-btn').disabled = state.symptoms.length === 0;
+  }
+
+  function updateSymptomHint() {
+    const hint = document.getElementById('symptom-hint');
+    const remaining = 3 - state.symptoms.length;
+    if (state.symptoms.length === 0) {
+      hint.textContent = '';
+    } else if (remaining > 0) {
+      hint.textContent = `Noch ${remaining} ${remaining === 1 ? 'Auswahl' : 'Auswahlen'} möglich`;
+    } else {
+      hint.textContent = 'Maximum erreicht';
+    }
+  }
+
+  // ── Goal ──
+  function selectGoal(btn) {
+    document.querySelectorAll('#screen-goal .choice-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.goal = btn.dataset.value;
+    setTimeout(() => goTo('screen-motivation'), 220);
+  }
+
+  // ── Motivation ──
+  function selectMotivation(btn) {
+    document.querySelectorAll('#screen-motivation .choice-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.motivation = btn.dataset.value;
+    setTimeout(() => goTo('screen-edu'), 220);
+  }
+
+  // ── Depth ──
+  function selectDepth(btn) {
+    document.querySelectorAll('#screen-depth .choice-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.depth = btn.dataset.value;
+    setTimeout(() => goTo('screen-email'), 220);
+  }
+
+  // ── Email ──
+  function submitEmail() {
+    const nameVal = document.getElementById('input-name').value.trim();
+    const emailVal = document.getElementById('input-email').value.trim();
+    const errEl = document.getElementById('email-error');
+    const emailInput = document.getElementById('input-email');
+
+    if (emailVal && !isValidEmail(emailVal)) {
+      emailInput.classList.add('error');
+      errEl.style.display = 'block';
+      return;
+    }
+    emailInput.classList.remove('error');
+    errEl.style.display = 'none';
+
+    state.name = nameVal;
+    state.email = emailVal;
+    runLoading();
+  }
+
+  function skipEmail() {
+    state.name = '';
+    state.email = '';
+    runLoading();
+  }
+
+  function isValidEmail(val) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  }
+
+  // ── Loading ──
+  function runLoading() {
+    goTo('screen-loading');
+    const steps = ['lstep-1', 'lstep-2', 'lstep-3'];
+    steps.forEach((id, i) => {
+      setTimeout(() => {
+        document.getElementById(id).classList.add('visible');
+      }, 500 + i * 700);
+    });
+    setTimeout(() => {
+      renderResult();
+      goTo('screen-result');
+    }, 2800);
+  }
+</script>
+</body>
+</html>
