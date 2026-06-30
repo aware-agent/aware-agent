@@ -88,6 +88,15 @@
       z-index: 0;
     }
 
+    .hero::after {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 50%; height: 100%;
+      background: linear-gradient(to right, var(--cream) 0%, transparent 40%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .hero-inner {
       position: relative; z-index: 1;
       max-width: 1200px; margin: 0 auto; width: 100%;
@@ -349,6 +358,41 @@
       color: var(--light);
     }
 
+    /* ── HERO IMAGE ─────────────────────────────────────────────── */
+    .hero-image {
+      position: absolute; top: 0; right: 0;
+      width: 50%; height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+    }
+
+    /* ── PILLAR IMAGES ───────────────────────────────────────────── */
+    .pillar-img {
+      width: 100%; height: 200px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .pillar-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+      transition: transform 0.6s ease, filter 0.3s;
+    }
+
+    .pillar:hover .pillar-img img {
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+
+    .pillar-number { margin-bottom: 16px; }
+
     /* ── RESPONSIVE ─────────────────────────────────────────────── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
@@ -380,6 +424,9 @@
 
   <!-- HERO -->
   <section class="hero" id="stiftung">
+    <div class="hero-image">
+      <img src="img/hero.jpg" alt="Hamburg Hafen">
+    </div>
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-eyebrow">Gemeinnützige Stiftung seit 1992</div>
@@ -418,6 +465,7 @@
     <div class="pillars-grid">
 
       <div class="pillar">
+        <div class="pillar-img"><img src="img/bildung.jpg" alt="Bildung"></div>
         <div class="pillar-number">01</div>
         <h3>Bildung &amp; Erziehung</h3>
         <p>
@@ -429,6 +477,7 @@
       </div>
 
       <div class="pillar">
+        <div class="pillar-img"><img src="img/jugend.jpg" alt="Jugendarbeit"></div>
         <div class="pillar-number">02</div>
         <h3>Jugendarbeit</h3>
         <p>
@@ -440,6 +489,7 @@
       </div>
 
       <div class="pillar">
+        <div class="pillar-img"><img src="img/natur.jpg" alt="Natur und Umwelt"></div>
         <div class="pillar-number">03</div>
         <h3>Natur &amp; Umwelt</h3>
         <p>
