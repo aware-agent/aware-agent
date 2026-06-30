@@ -16,7 +16,8 @@
       --rule:    #d8d4cc;
       --bg:      #faf9f6;
       --cream:   #f2efe8;
-      --gold:    #8b7355;
+      --red:     #b8003a;
+      --red-mid: #d4004a;
       --green:   #3d5a3e;
       --blue:    #2c4a6e;
     }
@@ -43,16 +44,15 @@
     }
 
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 17px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 14px;
       text-decoration: none;
     }
 
-    .nav-logo span {
-      color: var(--gold);
+    .nav-logo img {
+      height: 40px;
+      width: auto;
     }
 
     .nav-links {
@@ -110,14 +110,14 @@
       font-weight: 500;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--red);
       margin-bottom: 24px;
       display: flex; align-items: center; gap: 12px;
     }
 
     .hero-eyebrow::before {
       content: '';
-      display: block; width: 32px; height: 1px; background: var(--gold);
+      display: block; width: 32px; height: 1px; background: var(--red);
     }
 
     h1 {
@@ -131,7 +131,7 @@
 
     h1 em {
       font-style: italic;
-      color: var(--gold);
+      color: var(--red);
     }
 
     .hero-sub {
@@ -155,12 +155,12 @@
       transition: color 0.2s, border-color 0.2s;
     }
 
-    .hero-cta:hover { color: var(--gold); border-color: var(--gold); }
+    .hero-cta:hover { color: var(--red); border-color: var(--red); }
 
     .hero-quote {
       background: white;
       padding: 48px;
-      border-left: 3px solid var(--gold);
+      border-left: 3px solid var(--red);
     }
 
     .hero-quote blockquote {
@@ -198,7 +198,7 @@
       font-weight: 500;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--red);
       white-space: nowrap;
     }
 
@@ -264,7 +264,7 @@
     }
 
     .pillar:nth-child(1):hover .pillar-accent { background: var(--blue); }
-    .pillar:nth-child(2):hover .pillar-accent { background: var(--gold); }
+    .pillar:nth-child(2):hover .pillar-accent { background: var(--red); }
     .pillar:nth-child(3):hover .pillar-accent { background: var(--green); }
 
     /* ── ABOUT ──────────────────────────────────────────────────── */
@@ -279,7 +279,7 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start;
     }
 
-    .about .section-label { color: var(--gold); }
+    .about .section-label { color: var(--red); }
 
     .about h2 { color: white; margin-top: 20px; margin-bottom: 32px; }
 
@@ -316,7 +316,7 @@
 
     .stat-rule {
       width: 32px; height: 1px;
-      background: var(--gold);
+      background: var(--red);
       margin-bottom: 16px;
     }
 
@@ -328,14 +328,11 @@
       max-width: 1200px; margin: 0 auto;
     }
 
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--ink);
+    .footer-logo img {
+      height: 36px;
+      width: auto;
+      opacity: 0.8;
     }
-
-    .footer-logo span { color: var(--gold); }
 
     .footer-links {
       display: flex; gap: 32px; list-style: none;
@@ -413,7 +410,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="/" class="nav-logo">Edmund<span>Siemers</span>-Stiftung</a>
+    <a href="/" class="nav-logo"><img src="img/logo.jpg" alt="Edmund Siemers-Stiftung"></a>
     <ul class="nav-links">
       <li><a href="#stiftung">Die Stiftung</a></li>
       <li><a href="#schwerpunkte">Schwerpunkte</a></li>
@@ -549,7 +546,7 @@
 
   <!-- FOOTER -->
   <footer id="kontakt">
-    <div class="footer-logo">Edmund<span>Siemers</span>-Stiftung</div>
+    <div class="footer-logo"><img src="img/logo.jpg" alt="Edmund Siemers-Stiftung"></div>
     <ul class="footer-links">
       <li><a href="#">Impressum</a></li>
       <li><a href="#">Datenschutz</a></li>
