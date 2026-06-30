@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edmund Siemers-Stiftung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:     #1a1a18;
+      --mid:     #4a4a44;
+      --light:   #8a8a80;
+      --rule:    #d8d4cc;
+      --bg:      #faf9f6;
+      --cream:   #f2efe8;
+      --gold:    #8b7355;
+      --green:   #3d5a3e;
+      --blue:    #2c4a6e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(250,249,246,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex; gap: 40px; list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ───────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 50%; height: 100%;
+      background: var(--cream);
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+
+    .hero-text {}
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 32px; height: 1px; background: var(--gold);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 32px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 420px;
+      margin-bottom: 48px;
+    }
+
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-cta:hover { color: var(--gold); border-color: var(--gold); }
+
+    .hero-quote {
+      background: white;
+      padding: 48px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .hero-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--ink);
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .hero-quote cite {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      font-style: normal;
+    }
+
+    /* ── PILLARS ────────────────────────────────────────────────── */
+    .pillars {
+      padding: 120px 48px;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex; align-items: baseline; gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .pillar {
+      background: var(--cream);
+      padding: 48px 40px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .pillar:hover { background: white; }
+
+    .pillar-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 400;
+      color: var(--rule);
+      line-height: 1;
+      margin-bottom: 32px;
+    }
+
+    .pillar-icon {
+      width: 40px; height: 40px;
+      margin-bottom: 24px;
+      opacity: 0.6;
+    }
+
+    .pillar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .pillar p {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.75;
+    }
+
+    .pillar-accent {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: transparent;
+      transition: background 0.3s;
+    }
+
+    .pillar:nth-child(1):hover .pillar-accent { background: var(--blue); }
+    .pillar:nth-child(2):hover .pillar-accent { background: var(--gold); }
+    .pillar:nth-child(3):hover .pillar-accent { background: var(--green); }
+
+    /* ── ABOUT ──────────────────────────────────────────────────── */
+    .about {
+      background: var(--ink);
+      padding: 120px 48px;
+      color: white;
+    }
+
+    .about-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start;
+    }
+
+    .about .section-label { color: var(--gold); }
+
+    .about h2 { color: white; margin-top: 20px; margin-bottom: 32px; }
+
+    .about p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      padding-top: 20px;
+    }
+
+    .stat {}
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: white;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .stat-rule {
+      width: 32px; height: 1px;
+      background: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      padding: 60px 48px;
+      border-top: 1px solid var(--rule);
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-links {
+      display: flex; gap: 32px; list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--light);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .hero::before { display: none; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .pillars { padding: 80px 24px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .about { padding: 80px 24px; }
+      .about-inner { grid-template-columns: 1fr; gap: 60px; }
+      footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Edmund<span>Siemers</span>-Stiftung</a>
+    <ul class="nav-links">
+      <li><a href="#stiftung">Die Stiftung</a></li>
+      <li><a href="#schwerpunkte">Schwerpunkte</a></li>
+      <li><a href="#foerderung">Förderung</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="stiftung">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-eyebrow">Gemeinnützige Stiftung seit 1992</div>
+        <h1>Bildung.<br>Jugend.<br><em>Verantwortung.</em></h1>
+        <p class="hero-sub">
+          Die Edmund Siemers-Stiftung fördert Bildungsinitiativen, Jugendarbeit
+          und Natur- und Umweltschutz in der Tradition unternehmerischer
+          Verantwortung für das Gemeinwohl.
+        </p>
+        <a href="#schwerpunkte" class="hero-cta">
+          Unsere Schwerpunkte
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-quote">
+        <blockquote>
+          „Mit Wagemut etwas unternehmen, die Bildung seiner Mitmenschen zu fördern
+          und in dem Gemeinwesen, in dem der Unternehmer verdient, Verantwortung
+          in der Verwaltung zu übernehmen und zum Wohle seiner Mitbürger zu investieren."
+        </blockquote>
+        <cite>Edmund J.A. Siemers</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars" id="schwerpunkte">
+    <div class="section-header">
+      <span class="section-label">Förderschwerpunkte</span>
+      <h2>Drei Felder,<br>ein Auftrag</h2>
+    </div>
+
+    <div class="pillars-grid">
+
+      <div class="pillar">
+        <div class="pillar-number">01</div>
+        <h3>Bildung &amp; Erziehung</h3>
+        <p>
+          Unterstützung von Bildungsinitiativen, insbesondere zur Förderung
+          des Zusammenwachsens der beiden Teile Deutschlands und der
+          europäischen Integration mittel- und osteuropäischer Staaten.
+        </p>
+        <div class="pillar-accent"></div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-number">02</div>
+        <h3>Jugendarbeit</h3>
+        <p>
+          Förderung der Jugendhilfe, insbesondere durch die Integration
+          gesellschaftlicher Randgruppen und Minderheiten im Rahmen
+          kommunaler Gemeinwesen und Jugendarbeit.
+        </p>
+        <div class="pillar-accent"></div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-number">03</div>
+        <h3>Natur &amp; Umwelt</h3>
+        <p>
+          Förderung des Natur- und Umweltschutzes, insbesondere durch den
+          Schutz von Gewässern, Feuchtgebieten und Trinkwasserressourcen
+          sowie die Renaturierung von Feuchtgebieten.
+        </p>
+        <div class="pillar-accent"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-inner">
+      <div>
+        <span class="section-label">Die Stiftung</span>
+        <h2>Allgemeinwohl als Auftrag</h2>
+        <p>
+          Die gemeinnützige Edmund Siemers-Stiftung ist sowohl operativ als auch
+          fördernd tätig. Sie steht in der Tradition einer unternehmerischen
+          Philosophie, die wirtschaftlichen Erfolg als Verpflichtung gegenüber
+          der Gesellschaft begreift.
+        </p>
+        <p>
+          Das wiedervereinte Deutschland ist zurück in der Mitte Europas.
+          Hieraus ergeben sich neue Verantwortungen für eine zukunftsorientierte,
+          sozial und ökologisch denkende Zivilgesellschaft.
+        </p>
+      </div>
+
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-rule"></div>
+          <div class="stat-number">3</div>
+          <div class="stat-label">Förderbereiche</div>
+        </div>
+        <div class="stat">
+          <div class="stat-rule"></div>
+          <div class="stat-number">30+</div>
+          <div class="stat-label">Jahre Engagement</div>
+        </div>
+        <div class="stat">
+          <div class="stat-rule"></div>
+          <div class="stat-number">DE</div>
+          <div class="stat-label">& Osteuropa</div>
+        </div>
+        <div class="stat">
+          <div class="stat-rule"></div>
+          <div class="stat-number">§</div>
+          <div class="stat-label">Gemeinnützig</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="kontakt">
+    <div class="footer-logo">Edmund<span>Siemers</span>-Stiftung</div>
+    <ul class="footer-links">
+      <li><a href="#">Impressum</a></li>
+      <li><a href="#">Datenschutz</a></li>
+      <li><a href="#">Kontakt</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Edmund Siemers-Stiftung</span>
+  </footer>
+
+</body>
+</html>
