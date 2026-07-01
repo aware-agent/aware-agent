@@ -216,6 +216,27 @@
     .footer-links a:hover { color: var(--ink); }
     .footer-copy { font-size: 11px; color: var(--light); }
 
+
+    /* BLOG IMAGES */
+    .blog-img {
+      width: 100%; height: 220px;
+      overflow: hidden;
+    }
+    .blog-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(15%);
+      transition: transform 0.5s ease, filter 0.3s;
+    }
+    .blog-item:hover .blog-img img {
+      transform: scale(1.03);
+      filter: grayscale(0%);
+    }
+    /* On mobile: full width image on top */
+    @media (max-width: 768px) {
+      .blog-img { height: 180px; }
+    }
+
     /* MOBILE */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -228,6 +249,7 @@
       .two-col { grid-template-columns: 1fr; gap: 48px; }
       .three-col { grid-template-columns: 1fr; }
 
+      .blog-list { grid-template-columns: 1fr !important; }
       .blog-item { grid-template-columns: 1fr; }
       .blog-meta {
         padding: 20px 20px 0;
@@ -283,74 +305,86 @@ function toggleNav(){
 </section>
 
 <div class="content">
-  <div class="blog-list">
+  <div class="blog-list" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
 
-    <div class="blog-item">
-      <div class="blog-meta">
-        <div class="blog-date">Jun 2026</div>
-        <div class="blog-cat">Natur &amp; Umwelt</div>
-      </div>
-      <div class="blog-body">
-        <h3>Fachtagung „Lebendige Alster"</h3>
-        <p>Fachtagung zur ökologischen Entwicklung der Alster und ihrer Zuflüsse. Expertinnen und Experten aus Naturschutz, Stadtplanung und Politik diskutieren Renaturierungsmöglichkeiten im urbanen Raum.</p>
+    <div class="blog-item" style="display:flex;flex-direction:column;">
+      <div class="blog-img"><img src="img/proj_alster.jpg" alt="Fachtagung „Lebendige Alster""></div>
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="blog-meta" style="border-right:none;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:16px 20px;">
+          <div class="blog-date">Jun 2026</div>
+          <div class="blog-cat">Natur &amp; Umwelt</div>
+        </div>
+        <div class="blog-body" style="padding:24px;flex:1;">
+          <h3 style="margin-bottom:8px;">Fachtagung „Lebendige Alster"</h3>
+          <p style="font-size:14px;margin-bottom:0;">Fachtagung zur ökologischen Entwicklung der Alster und ihrer Zuflüsse. Expertinnen und Experten aus Naturschutz, Stadtplanung und Politik diskutieren Renaturierungsmöglichkeiten im urbanen Raum.</p>
+        </div>
       </div>
     </div>
-
-    <div class="blog-item">
-      <div class="blog-meta">
-        <div class="blog-date">Feb 2026</div>
-        <div class="blog-cat">Jugend&shy;förderung</div>
-      </div>
-      <div class="blog-body">
-        <h3>Seniorenheim Tulipan, Rumänien</h3>
-        <p>Unterstützung einer sozialen Einrichtung in Rumänien im Rahmen der europäischen Integration und Gemeinwesenarbeit.</p>
-      </div>
-    </div>
-
-    <div class="blog-item">
-      <div class="blog-meta">
-        <div class="blog-date">Jan 2026</div>
-        <div class="blog-cat">Natur &amp; Umwelt</div>
-      </div>
-      <div class="blog-body">
-        <h3>Landschaftspark Schmokbachtal/Neddernhof</h3>
-        <p>Kurzbericht zur Entwicklung des Landschaftsparks Schmokbachtal. Fortschritte bei der Renaturierung und Biotopvernetzung im Hamburger Umland.</p>
+    <div class="blog-item" style="display:flex;flex-direction:column;">
+      <div class="blog-img"><img src="img/proj_tulipan.jpg" alt="Seniorenheim Tulipan, Rumänien"></div>
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="blog-meta" style="border-right:none;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:16px 20px;">
+          <div class="blog-date">Feb 2026</div>
+          <div class="blog-cat">Jugend&shy;förderung</div>
+        </div>
+        <div class="blog-body" style="padding:24px;flex:1;">
+          <h3 style="margin-bottom:8px;">Seniorenheim Tulipan, Rumänien</h3>
+          <p style="font-size:14px;margin-bottom:0;">Unterstützung einer sozialen Einrichtung in Rumänien im Rahmen der europäischen Integration und Gemeinwesenarbeit.</p>
+        </div>
       </div>
     </div>
-
-    <div class="blog-item">
-      <div class="blog-meta">
-        <div class="blog-date">Dez 2025</div>
-        <div class="blog-cat">Bildung</div>
-      </div>
-      <div class="blog-body">
-        <h3>Werner-von-Melle-Preis 2025</h3>
-        <p>Juristin Manuela Niehaus erhält den Werner-von-Melle-Preis 2025 für herausragende wissenschaftliche Arbeit mit gesellschaftlicher Relevanz.</p>
-      </div>
-    </div>
-
-    <div class="blog-item">
-      <div class="blog-meta">
-        <div class="blog-date">Dez 2025</div>
-        <div class="blog-cat">Jugend&shy;förderung</div>
-      </div>
-      <div class="blog-body">
-        <h3>Gefangene helfen e.V.</h3>
-        <p>Unterstützung der Reintegration von Strafgefangenen in die Gesellschaft durch sozialpädagogische Begleitung und Qualifizierungsangebote.</p>
+    <div class="blog-item" style="display:flex;flex-direction:column;">
+      <div class="blog-img"><img src="img/proj_schmokbach.jpg" alt="Landschaftspark Schmokbachtal/Neddernhof"></div>
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="blog-meta" style="border-right:none;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:16px 20px;">
+          <div class="blog-date">Jan 2026</div>
+          <div class="blog-cat">Natur &amp; Umwelt</div>
+        </div>
+        <div class="blog-body" style="padding:24px;flex:1;">
+          <h3 style="margin-bottom:8px;">Landschaftspark Schmokbachtal/Neddernhof</h3>
+          <p style="font-size:14px;margin-bottom:0;">Kurzbericht zur Entwicklung des Landschaftsparks Schmokbachtal. Fortschritte bei der Renaturierung und Biotopvernetzung im Hamburger Umland.</p>
+        </div>
       </div>
     </div>
-
-    <div class="blog-item">
-      <div class="blog-meta">
-        <div class="blog-date">Laufend</div>
-        <div class="blog-cat">Natur &amp; Umwelt</div>
-      </div>
-      <div class="blog-body">
-        <h3>Projekt Este-Wümme</h3>
-        <p>Langfristiges Renaturierungsprojekt: Die Heidebäche Seeve, Este, Oste und Wümme sollen zum ökologischen Rückgrat im nördlichen Niedersachsen entwickelt werden — einem zentralen Trinkwassergebiet für Hamburg.</p>
+    <div class="blog-item" style="display:flex;flex-direction:column;">
+      <div class="blog-img"><img src="img/proj_melle_preis.jpg" alt="Werner-von-Melle-Preis 2025"></div>
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="blog-meta" style="border-right:none;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:16px 20px;">
+          <div class="blog-date">Dez 2025</div>
+          <div class="blog-cat">Bildung</div>
+        </div>
+        <div class="blog-body" style="padding:24px;flex:1;">
+          <h3 style="margin-bottom:8px;">Werner-von-Melle-Preis 2025</h3>
+          <p style="font-size:14px;margin-bottom:0;">Juristin Manuela Niehaus erhält den Werner-von-Melle-Preis 2025 für herausragende wissenschaftliche Arbeit mit gesellschaftlicher Relevanz.</p>
+        </div>
       </div>
     </div>
-
+    <div class="blog-item" style="display:flex;flex-direction:column;">
+      <div class="blog-img"><img src="img/proj_gefangene.jpg" alt="Gefangene helfen e.V."></div>
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="blog-meta" style="border-right:none;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:16px 20px;">
+          <div class="blog-date">Dez 2025</div>
+          <div class="blog-cat">Jugend&shy;förderung</div>
+        </div>
+        <div class="blog-body" style="padding:24px;flex:1;">
+          <h3 style="margin-bottom:8px;">Gefangene helfen e.V.</h3>
+          <p style="font-size:14px;margin-bottom:0;">Unterstützung der Reintegration von Strafgefangenen in die Gesellschaft durch sozialpädagogische Begleitung und Qualifizierungsangebote.</p>
+        </div>
+      </div>
+    </div>
+    <div class="blog-item" style="display:flex;flex-direction:column;">
+      <div class="blog-img"><img src="img/proj_estewuemme.jpg" alt="Projekt Este-Wümme"></div>
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="blog-meta" style="border-right:none;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:center;padding:16px 20px;">
+          <div class="blog-date">Laufend</div>
+          <div class="blog-cat">Natur &amp; Umwelt</div>
+        </div>
+        <div class="blog-body" style="padding:24px;flex:1;">
+          <h3 style="margin-bottom:8px;">Projekt Este-Wümme</h3>
+          <p style="font-size:14px;margin-bottom:0;">Langfristiges Renaturierungsprojekt: Die Heidebäche Seeve, Este, Oste und Wümme sollen zum ökologischen Rückgrat im nördlichen Niedersachsen entwickelt werden — einem zentralen Trinkwassergebiet für Hamburg.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
