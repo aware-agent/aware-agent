@@ -385,9 +385,7 @@
       opacity: 0.8;
     }
 
-    .footer-links {
-      display: flex; gap: 32px; list-style: none;
-    }
+    
 
     .footer-links a {
       font-size: 12px;
@@ -401,10 +399,7 @@
 
     .footer-links a:hover { color: var(--ink); }
 
-    .footer-copy {
-      font-size: 12px;
-      color: var(--light);
-    }
+    
 
     /* ── HERO IMAGE ─────────────────────────────────────────────── */
     .hero-image {
@@ -460,7 +455,7 @@
       .about { padding: 80px 24px; }
       .about-inner { grid-template-columns: 1fr; gap: 60px; }
       footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
+      
     }
 
     /* ── MOBILE NAV ─────────────────────────────────────────────── */
@@ -493,6 +488,51 @@
     @media (max-width: 900px) {
       .hamburger { display: flex; }
       .nav-links { display: none !important; }
+    }
+
+  
+    /* FOOTER */
+    footer { border-top: 1px solid var(--rule); margin-top: 80px; }
+    .site-footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 56px 40px 40px;
+      display: grid;
+      grid-template-columns: 180px 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-brand img { height: 36px; opacity: 0.7; display: block; }
+    .footer-nav-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--light); margin-bottom: 16px;
+    }
+    .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-nav a, .footer-contact a {
+      font-size: 14px; color: var(--mid); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-nav a:hover, .footer-contact a:hover { color: var(--red); }
+    .footer-contact p {
+      font-size: 14px; color: var(--mid); line-height: 1.6;
+      margin-bottom: 8px; max-width: none;
+    }
+    .footer-contact a { font-size: 13px; }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto;
+      padding: 20px 40px;
+      border-top: 1px solid var(--rule);
+      font-size: 11px; color: var(--light);
+    }
+    @media (max-width: 768px) {
+      .site-footer {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px; padding: 40px 20px 32px;
+      }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom { padding: 16px 20px; }
+      footer { margin-top: 48px; }
+    }
+    @media (max-width: 400px) {
+      .site-footer { grid-template-columns: 1fr; }
     }
 
   </style>
