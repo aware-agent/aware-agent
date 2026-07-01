@@ -209,9 +209,10 @@
     .hero-cta:hover { color: var(--red); border-color: var(--red); }
 
     .hero-quote {
-      background: white;
+      background: rgba(255,255,255,0.82);
       padding: 48px;
       border-left: 3px solid var(--red);
+      backdrop-filter: blur(4px);
     }
 
     .hero-quote blockquote {
@@ -419,7 +420,7 @@
     .hero-image img {
       width: 100%; height: 100%;
       object-fit: cover;
-      opacity: 0.7;
+      opacity: 0.9;
     }
 
     /* ── PILLAR IMAGES ───────────────────────────────────────────── */
@@ -500,7 +501,7 @@
       grid-template-columns: 180px 1fr 1fr 1fr;
       gap: 40px;
     }
-    .footer-brand img { height: 36px; opacity: 0.7; display: block; }
+    .footer-brand img { height: 36px; opacity: 0.9; display: block; }
     .footer-nav-label {
       font-size: 10px; font-weight: 600;
       letter-spacing: 0.14em; text-transform: uppercase;
@@ -573,7 +574,7 @@ function toggleNav() {
   <section class="hero" id="stiftung">
     <div class="hero-bg"></div>
     <div class="hero-image">
-      <img src="img/hero.jpg" alt="Hamburg Hafen">
+      <img src="img/edmund_siemers.jpg" alt="Hamburg Hafen">
     </div>
     <div class="hero-inner">
       <div class="hero-text">
