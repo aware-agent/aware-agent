@@ -1,449 +1,494 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projekte | Edmund Siemers-Stiftung</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --ink:   #1a1a18;
-      --mid:   #4a4a44;
-      --light: #8a8a80;
-      --rule:  #d8d4cc;
-      --bg:    #faf9f6;
-      --cream: #f2efe8;
-      --red:   #b8003a;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      font-size: 16px;
-      line-height: 1.7;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 68px;
-      background: rgba(250,249,246,0.97);
-      border-bottom: 1px solid var(--rule);
-    }
-    .nav-logo { text-decoration: none; }
-    .nav-logo img { height: 36px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--mid); text-decoration: none;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--red); }
-
-    /* HAMBURGER */
-    .hamburger {
-      display: none; flex-direction: column; justify-content: center;
-      gap: 5px; background: none; border: none; cursor: pointer; padding: 6px;
-    }
-    .hamburger span {
-      display: block; width: 22px; height: 1.5px; background: var(--ink);
-      transition: all 0.25s; transform-origin: center;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    /* MOBILE OVERLAY */
-    .mob-menu {
-      display: none; position: fixed;
-      top: 68px; left: 0; right: 0; bottom: 0; z-index: 999;
-      background: var(--bg); padding: 24px;
-      flex-direction: column;
-    }
-    .mob-menu.open { display: flex; }
-    .mob-menu a {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px; color: var(--ink); text-decoration: none;
-      padding: 18px 0; border-bottom: 1px solid var(--rule);
-    }
-    .mob-menu a:hover { color: var(--red); }
-
-    /* PAGE HERO */
-    .page-hero {
-      padding: 120px 40px 64px;
-      max-width: 1100px; margin: 0 auto;
-      border-bottom: 1px solid var(--rule);
-    }
-    .eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--red);
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 20px;
-    }
-    .eyebrow::before {
-      content: ''; display: block;
-      width: 28px; height: 1px; background: var(--red);
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 400; line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .lead {
-      font-size: 17px; color: var(--mid);
-      line-height: 1.8; max-width: 600px;
-    }
-
-    /* CONTENT */
-    .content {
-      max-width: 1100px; margin: 0 auto;
-      padding: 64px 40px;
-    }
-
-    .section-label {
-      display: block;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--red); margin-bottom: 10px;
-    }
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 3vw, 34px);
-      font-weight: 400; line-height: 1.25; margin-bottom: 20px;
-    }
-    h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 19px; font-weight: 500;
-      line-height: 1.3; margin-bottom: 12px;
-    }
-    p {
-      font-size: 15px; color: var(--mid);
-      line-height: 1.85; margin-bottom: 18px;
-      max-width: 680px;
-    }
-    hr { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
-
-    /* GRID */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px; align-items: start;
-    }
-    .three-col {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-
-    /* CARD */
-    .card {
-      background: var(--cream); padding: 36px;
-      transition: background 0.2s;
-    }
-    .card:hover { background: white; }
-    .card-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 56px; color: #e0dbd2;
-      line-height: 1; margin-bottom: 20px;
-    }
-    .card p { max-width: none; margin-bottom: 0; }
-
-    /* BLOG LIST */
-    .blog-list { display: flex; flex-direction: column; gap: 2px; }
-    .blog-item {
-      display: grid; grid-template-columns: 140px 1fr;
-      background: var(--cream); transition: background 0.2s;
-    }
-    .blog-item:hover { background: white; }
-    .blog-meta {
-      padding: 32px 24px;
-      border-right: 1px solid var(--rule);
-    }
-    .blog-date {
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--red);
-    }
-    .blog-cat {
-      font-size: 11px; color: var(--light);
-      margin-top: 6px; line-height: 1.4;
-    }
-    .blog-body { padding: 32px 36px; }
-    .blog-body h3 { margin-bottom: 8px; }
-    .blog-body p { margin-bottom: 0; font-size: 14px; }
-
-    /* CONTACT */
-    .contact-label {
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--light); margin-bottom: 6px;
-    }
-    .contact-value {
-      font-size: 16px; color: var(--ink);
-      text-decoration: none; display: block;
-    }
-    a.contact-value:hover { color: var(--red); }
-
-    .btn-red {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--red); color: white;
-      padding: 14px 24px; text-decoration: none;
-      font-size: 12px; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      border: none; cursor: pointer; width: 100%;
-      justify-content: center;
-    }
-
-    
-    
-    /* MOBILE */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-
-      .page-hero { padding: 100px 20px 48px; }
-      .content { padding: 48px 20px; }
-
-      .two-col { grid-template-columns: 1fr; gap: 48px; }
-      .three-col { grid-template-columns: 1fr; }
-
-      .blog-list { grid-template-columns: 1fr !important; }
-      .blog-item { grid-template-columns: 1fr; }
-      .blog-meta {
-        padding: 20px 20px 0;
-        border-right: none; border-bottom: 1px solid var(--rule);
-        display: flex; gap: 12px; align-items: center;
-        padding-bottom: 12px;
-      }
-      .blog-body { padding: 16px 20px 24px; }
-
-      
-      
-
-      h1 { font-size: 32px; }
-      h2 { font-size: 24px; }
-      h3 { font-size: 18px; }
-      .lead { font-size: 16px; }
-    }
-  
-    .proj-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-    }
-    .proj-card {
-      background: var(--cream);
-      display: flex; flex-direction: column;
-      overflow: hidden;
-      transition: background 0.2s;
-    }
-    .proj-card:hover { background: white; }
-    .proj-card-img {
-      width: 100%; aspect-ratio: 16/10;
-      overflow: hidden; flex-shrink: 0;
-    }
-    .proj-card-img img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-      filter: grayscale(10%);
-      transition: transform 0.5s, filter 0.3s;
-    }
-    .proj-card:hover .proj-card-img img {
-      transform: scale(1.04); filter: grayscale(0%);
-    }
-    .proj-card-body {
-      padding: 24px 28px 32px;
-      flex: 1; display: flex; flex-direction: column;
-    }
-    .proj-card-meta {
-      display: flex; gap: 10px; align-items: center; margin-bottom: 12px;
-    }
-    .proj-card-date {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--red);
-    }
-    .proj-card-cat { font-size: 10px; color: var(--light); }
-    .proj-card-body h3 { font-size: 17px; margin-bottom: 10px; line-height: 1.3; }
-    .proj-card-body p {
-      font-size: 13px; line-height: 1.75; margin-bottom: 0; max-width: none; flex: 1;
-    }
-    @media (max-width: 900px) { .proj-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 600px) { .proj-grid { grid-template-columns: 1fr; } }
-
-  
-    /* FOOTER */
-    footer { border-top: 1px solid var(--rule); margin-top: 80px; }
-    .site-footer {
-      max-width: 1100px; margin: 0 auto;
-      padding: 56px 40px 40px;
-      display: grid;
-      grid-template-columns: 180px 1fr 1fr 1fr;
-      gap: 40px;
-    }
-    .footer-brand img { height: 36px; opacity: 0.7; display: block; }
-    .footer-nav-label {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--light); margin-bottom: 16px;
-    }
-    .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-nav a, .footer-contact a {
-      font-size: 14px; color: var(--mid); text-decoration: none; transition: color 0.2s;
-    }
-    .footer-nav a:hover, .footer-contact a:hover { color: var(--red); }
-    .footer-contact p {
-      font-size: 14px; color: var(--mid); line-height: 1.6;
-      margin-bottom: 8px; max-width: none;
-    }
-    .footer-contact a { font-size: 13px; }
-    .footer-bottom {
-      max-width: 1100px; margin: 0 auto;
-      padding: 20px 40px;
-      border-top: 1px solid var(--rule);
-      font-size: 11px; color: var(--light);
-    }
-    @media (max-width: 768px) {
-      .site-footer {
-        grid-template-columns: 1fr 1fr;
-        gap: 32px; padding: 40px 20px 32px;
-      }
-      .footer-brand { grid-column: 1 / -1; }
-      .footer-bottom { padding: 16px 20px; }
-      footer { margin-top: 48px; }
-    }
-    @media (max-width: 400px) {
-      .site-footer { grid-template-columns: 1fr; }
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekte - Edmund Siemers-Stiftung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --color-accent: #b8003a;
+            --color-bg: #faf9f6;
+            --color-dark: #1a1a18;
+            --color-text: #1a1a18;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--color-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-dark);
+            transition: all 0.3s;
+        }
+        
+        .nav-hamburger span:nth-child(2) {
+            margin: 6px 0;
+        }
+        
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-bg);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-overlay.active {
+            display: flex;
+        }
+        
+        .nav-overlay a {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+        }
+        
+        .nav-overlay a:hover {
+            color: var(--color-accent);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-hamburger {
+                display: flex;
+            }
+        }
+        
+        /* Page Hero */
+        .page-hero {
+            padding: 10rem 2rem 4rem;
+            text-align: center;
+        }
+        
+        .page-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+        }
+        
+        /* Projects Grid */
+        .projects-section {
+            padding: 2rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: #fff;
+            overflow: hidden;
+        }
+        
+        .project-image {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.75rem;
+        }
+        
+        .project-category {
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+        
+        .project-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        
+        .project-text {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Footer */
+        .footer {
+            background: #fff;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-col-logo img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .footer-col h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-col a {
+            font-size: 0.95rem;
+            color: #666;
+            transition: color 0.2s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--color-accent);
+        }
+        
+        .footer-col p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo"><img src="img/logo.jpg" alt="Edmund Siemers-Stiftung"></a>
-  <ul class="nav-links">
-    <li><a href="stiftung.html">Die Stiftung</a></li>
-    <li><a href="foerderung.html">Förderung</a></li>
-    <li><a href="projekte.html" class="active">Projekte</a></li>
-    <li><a href="kontakt.html">Kontakt</a></li>
-  </ul>
-  <button class="hamburger" id="hbg" onclick="toggleNav()" aria-label="Menü">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mob-menu" id="mobMenu">
-  <a href="stiftung.html" onclick="toggleNav()">Die Stiftung</a>
-  <a href="foerderung.html" onclick="toggleNav()">Förderung</a>
-  <a href="projekte.html" onclick="toggleNav()">Projekte</a>
-  <a href="kontakt.html" onclick="toggleNav()">Kontakt</a>
-</div>
-<script>
-function toggleNav(){
-  var h=document.getElementById('hbg'), m=document.getElementById('mobMenu');
-  h.classList.toggle('open'); m.classList.toggle('open');
-  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
-}
-</script>
-<div class="mob-menu" id="mobMenu">
-  <a href="stiftung.html" onclick="toggleNav()">Die Stiftung</a>
-  <a href="foerderung.html" onclick="toggleNav()">Förderung</a>
-  <a href="projekte.html" onclick="toggleNav()">Projekte</a>
-  <a href="kontakt.html" onclick="toggleNav()">Kontakt</a>
-</div>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="img/logo.jpg" alt="Edmund Siemers-Stiftung">
+        </a>
+        <ul class="nav-links">
+            <li><a href="stiftung.html">Die Stiftung</a></li>
+            <li><a href="foerderung.html">Förderung</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+        <button class="nav-hamburger" aria-label="Menü öffnen">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    
+    <div class="nav-overlay">
+        <a href="stiftung.html">Die Stiftung</a>
+        <a href="foerderung.html">Förderung</a>
+        <a href="projekte.html">Projekte</a>
+        <a href="kontakt.html">Kontakt</a>
+    </div>
 
-<section class="page-hero">
-  <div class="eyebrow">Projekte &amp; Förderungen</div>
-  <h1>Unsere<br>Förderprojekte</h1>
-  <p class="lead">Geförderte Projekte und Initiativen — chronologisch dokumentiert.</p>
-</section>
+    <section class="page-hero">
+        <h1>Unsere Förderprojekte</h1>
+    </section>
 
-<div class="content">
-<div class="proj-grid">
-  <div class="proj-card">
-    <div class="proj-card-img"><img src="img/proj_alster.jpg" alt="Fachtagung &#8222;Lebendige Alster&#8220;"></div>
-    <div class="proj-card-body">
-      <div class="proj-card-meta"><span class="proj-card-date">Jun 2026</span><span class="proj-card-cat">Natur &amp; Umwelt</span></div>
-      <h3>Fachtagung &#8222;Lebendige Alster&#8220;</h3>
-      <p>Fachtagung zur ökologischen Entwicklung der Alster und ihrer Zufllüsse. Expertinnen und Experten aus Naturschutz, Stadtplanung und Politik diskutieren Renaturierungsmöglichkeiten im urbanen Raum.</p>
-    </div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-card-img"><img src="img/proj_tulipan.jpg" alt="Seniorenheim Tulipan, Rumänien"></div>
-    <div class="proj-card-body">
-      <div class="proj-card-meta"><span class="proj-card-date">Feb 2026</span><span class="proj-card-cat">Jugendförderung</span></div>
-      <h3>Seniorenheim Tulipan, Rumänien</h3>
-      <p>Unterstützung einer sozialen Einrichtung in Rumänien im Rahmen der europäischen Integration und Gemeinwesenarbeit.</p>
-    </div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-card-img"><img src="img/proj_schmokbach.jpg" alt="Landschaftspark Schmokbachtal/Neddernhof"></div>
-    <div class="proj-card-body">
-      <div class="proj-card-meta"><span class="proj-card-date">Jan 2026</span><span class="proj-card-cat">Natur &amp; Umwelt</span></div>
-      <h3>Landschaftspark Schmokbachtal/Neddernhof</h3>
-      <p>Kurzbericht zur Entwicklung des Landschaftsparks Schmokbachtal. Fortschritte bei der Renaturierung und Biotopvernetzung im Hamburger Umland.</p>
-    </div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-card-img"><img src="img/proj_melle_preis.jpg" alt="Werner-von-Melle-Preis 2025"></div>
-    <div class="proj-card-body">
-      <div class="proj-card-meta"><span class="proj-card-date">Dez 2025</span><span class="proj-card-cat">Bildung</span></div>
-      <h3>Werner-von-Melle-Preis 2025</h3>
-      <p>Juristin Manuela Niehaus erhält den Werner-von-Melle-Preis 2025 für herausragende wissenschaftliche Arbeit mit gesellschaftlicher Relevanz.</p>
-    </div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-card-img"><img src="img/proj_gefangene.jpg" alt="Gefangene helfen e.V."></div>
-    <div class="proj-card-body">
-      <div class="proj-card-meta"><span class="proj-card-date">Dez 2025</span><span class="proj-card-cat">Jugendförderung</span></div>
-      <h3>Gefangene helfen e.V.</h3>
-      <p>Unterstützung der Reintegration von Strafgefangenen durch sozialpädagogische Begleitung und Qualifizierungsangebote.</p>
-    </div>
-  </div>
-  <div class="proj-card">
-    <div class="proj-card-img"><img src="img/proj_estewuemme.jpg" alt="Projekt Este-Wümme"></div>
-    <div class="proj-card-body">
-      <div class="proj-card-meta"><span class="proj-card-date">Laufend</span><span class="proj-card-cat">Natur &amp; Umwelt</span></div>
-      <h3>Projekt Este-Wümme</h3>
-      <p>Langfristiges Renaturierungsprojekt: Heidebäche Seeve, Este, Oste und Wümme sollen zum ökologischen Rückgrat im nördlichen Niedersachsen entwickelt werden.</p>
-    </div>
-  </div>
-</div>
-</div>
+    <section class="projects-section">
+        <div class="projects-grid">
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="img/proj_alster.jpg" alt="Fachtagung Lebendige Alster">
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span>Jun 2026</span>
+                        <span class="project-category">Natur und Umwelt</span>
+                    </div>
+                    <h3 class="project-title">Fachtagung Lebendige Alster</h3>
+                    <p class="project-text">Wissenschaftlicher Austausch zur ökologischen Aufwertung der Alster und ihrer Nebengewässer. Expert:innen diskutieren Renaturierungsmassnahmen.</p>
+                </div>
+            </article>
 
-<footer>
-  <div class="site-footer">
-    <div class="footer-brand">
-      <a href="index.html"><img src="img/logo.jpg" alt="Edmund Siemers-Stiftung"></a>
-    </div>
-    <div class="footer-nav">
-      <div class="footer-nav-label">Navigation</div>
-      <ul>
-        <li><a href="stiftung.html">Die Stiftung</a></li>
-        <li><a href="foerderung.html">Förderung</a></li>
-        <li><a href="projekte.html">Projekte</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-      </ul>
-    </div>
-    <div class="footer-nav">
-      <div class="footer-nav-label">Rechtliches</div>
-      <ul>
-        <li><a href="#">Impressum</a></li>
-        <li><a href="#">Datenschutz</a></li>
-      </ul>
-    </div>
-    <div class="footer-contact">
-      <div class="footer-nav-label">Kontakt</div>
-      <p>Schlankreye 67<br>20144 Hamburg</p>
-      <a href="mailto:info@edmundsiemers-stiftung.de">info@edmundsiemers-stiftung.de</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>&copy; 2026 Edmund Siemers-Stiftung</span>
-  </div>
-</footer>
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="img/proj_tulipan.jpg" alt="Seniorenheim Tulipan Rumänien">
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span>Feb 2026</span>
+                        <span class="project-category">Jugendförderung</span>
+                    </div>
+                    <h3 class="project-title">Seniorenheim Tulipan Rumänien</h3>
+                    <p class="project-text">Förderung eines Jugendaustauschprogramms zwischen Hamburg und Rumänien. Junge Menschen engagieren sich ehrenamtlich in der Altenpflege.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="img/proj_schmokbach.jpg" alt="Landschaftspark Schmokbachtal">
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span>Jan 2026</span>
+                        <span class="project-category">Natur und Umwelt</span>
+                    </div>
+                    <h3 class="project-title">Landschaftspark Schmokbachtal</h3>
+                    <p class="project-text">Entwicklung eines naturnahen Erholungsgebiets im Hamburger Umland. Verbindung von Naturschutz und sanftem Tourismus.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="img/proj_melle_preis.jpg" alt="Werner-von-Melle-Preis 2025">
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span>Dez 2025</span>
+                        <span class="project-category">Bildung</span>
+                    </div>
+                    <h3 class="project-title">Werner-von-Melle-Preis 2025</h3>
+                    <p class="project-text">Auszeichnung herausragender wissenschaftlicher Arbeiten an der Universität Hamburg. Der Preis ehrt das Vermächtnis des ersten Universitätspräsidenten.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="img/proj_gefangene.jpg" alt="Gefangene helfen eV">
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span>Dez 2025</span>
+                        <span class="project-category">Jugendförderung</span>
+                    </div>
+                    <h3 class="project-title">Gefangene helfen eV</h3>
+                    <p class="project-text">Präventionsarbeit an Schulen durch ehemalige Strafgefangene. Authentische Berichte warnen Jugendliche vor den Folgen von Kriminalität.</p>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-image">
+                    <img src="img/proj_estewuemme.jpg" alt="Projekt Este-Wümme">
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span>Laufend</span>
+                        <span class="project-category">Natur und Umwelt</span>
+                    </div>
+                    <h3 class="project-title">Projekt Este-Wümme</h3>
+                    <p class="project-text">Langfristiges Engagement für den Erhalt der Kulturlandschaft südlich von Hamburg. Biodiversität, extensive Landwirtschaft und Gewässerschutz.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col footer-col-logo">
+                <a href="index.html">
+                    <img src="img/logo.jpg" alt="Edmund Siemers-Stiftung">
+                </a>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="stiftung.html">Die Stiftung</a></li>
+                    <li><a href="foerderung.html">Förderung</a></li>
+                    <li><a href="projekte.html">Projekte</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="#">Impressum</a></li>
+                    <li><a href="#">Datenschutz</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <p>Edmund Siemers-Stiftung<br>
+                Schlankreye 67<br>
+                20144 Hamburg</p>
+                <p style="margin-top: 1rem;"><a href="mailto:info@edmundsiemers-stiftung.de">info@edmundsiemers-stiftung.de</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Edmund Siemers-Stiftung. Alle Rechte vorbehalten.
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.nav-hamburger');
+        const overlay = document.querySelector('.nav-overlay');
+        
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        overlay.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
 </body>
 </html>
