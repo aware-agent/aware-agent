@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | Edmund Siemers-Stiftung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --ink: #1a1a18; --mid: #4a4a44; --light: #8a8a80;
+            --rule: #d8d4cc; --bg: #faf9f6; --cream: #f2efe8; --red: #b8003a;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); font-size: 16px; line-height: 1.7; }
+        
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 68px; background: rgba(250,249,246,0.97); border-bottom: 1px solid var(--rule); }
+        .nav-logo img { height: 36px; display: block; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; }
+        .nav-links a:hover { color: var(--red); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+        .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: 0.25s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        .mob-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; bottom: 0; z-index: 999; background: var(--bg); padding: 24px; flex-direction: column; }
+        .mob-menu.open { display: flex; }
+        .mob-menu a { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--ink); text-decoration: none; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+
+        /* PAGE */
+        .page-hero { padding: 140px 40px 64px; max-width: 800px; margin: 0 auto; }
+        .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 400; line-height: 1.2; margin-bottom: 24px; }
+        .content { max-width: 800px; margin: 0 auto; padding: 0 40px 80px; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 500; margin: 40px 0 16px; color: var(--ink); }
+        p { font-size: 15px; color: var(--mid); line-height: 1.85; margin-bottom: 16px; }
+        a { color: var(--red); }
+
+        /* FOOTER */
+        footer { border-top: 1px solid var(--rule); margin-top: 80px; }
+        .footer-grid { max-width: 1100px; margin: 0 auto; padding: 56px 40px 40px; display: grid; grid-template-columns: 180px 1fr 1fr 1fr; gap: 40px; }
+        .footer-col-logo img { height: 36px; opacity: 0.7; }
+        .footer-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light); margin-bottom: 16px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { font-size: 14px; color: var(--mid); text-decoration: none; }
+        .footer-col a:hover { color: var(--red); }
+        .footer-col p { font-size: 14px; color: var(--mid); line-height: 1.6; margin: 0; }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding: 20px 40px; border-top: 1px solid var(--rule); font-size: 11px; color: var(--light); }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .page-hero { padding: 100px 20px 48px; }
+            .page-hero h1 { font-size: 32px; }
+            .content { padding: 0 20px 60px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; padding: 40px 20px; }
+            .footer-col-logo { grid-column: 1 / -1; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo"><img src="img/logo.jpg" alt="Edmund Siemers-Stiftung"></a>
+        <ul class="nav-links">
+            <li><a href="stiftung.html">Die Stiftung</a></li>
+            <li><a href="foerderung.html">Förderung</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+        <button class="hamburger" onclick="document.querySelector('.hamburger').classList.toggle('open');document.querySelector('.mob-menu').classList.toggle('open');">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="mob-menu">
+        <a href="stiftung.html">Die Stiftung</a>
+        <a href="foerderung.html">Förderung</a>
+        <a href="projekte.html">Projekte</a>
+        <a href="kontakt.html">Kontakt</a>
+    </div>
+
+    <section class="page-hero">
+        <div class="eyebrow">Rechtliches</div>
+        <h1>Impressum</h1>
+    </section>
+
+    <div class="content">
+        <h2>Verantwortlicher (V.i.S.d.P.)</h2>
+        <p>
+            Dr. Andreas Graf Wass von Czege<br>
+            Edmund Siemers-Stiftung<br><br>
+            Schlankreye 67<br>
+            20144 Hamburg<br><br>
+            Tel: 040 420 63 98<br>
+            E-Mail: <a href="mailto:info@edmundsiemers-stiftung.de">info@edmundsiemers-stiftung.de</a>
+        </p>
+
+        <h2>Vertretungsberechtigte</h2>
+        <p>
+            <strong>Vorsitzender des Vorstandes:</strong><br>
+            Dr. Andreas Graf Wass von Czege<br><br>
+            <strong>Vorsitzender des Stiftungsrates:</strong><br>
+            Edmund Siemers
+        </p>
+
+        <h2>Zuständige Behörden</h2>
+        <p>
+            <strong>Zuständiges Gericht:</strong><br>
+            Amtsgericht Hamburg<br><br>
+            <strong>Zuständige Finanzbehörde:</strong><br>
+            Finanzamt Hamburg - Nord<br>
+            Steuernummer: 17 / 408 / 01240
+        </p>
+
+        <h2>Haftungshinweis</h2>
+        <p>
+            Die veröffentlichten Links wurden mit größtmöglicher Sorgfalt recherchiert und zusammengestellt. Der Seitenbetreiber hat keinen Einfluss auf die Gestaltung und die Inhalte der verlinkten Seiten. Er ist nicht für den Inhalt der verknüpften Seiten verantwortlich und macht sich den Inhalt nicht zu Eigen.
+        </p>
+        <p>
+            Für illegale, fehlerhafte oder unvollständige Inhalte sowie für Schäden, die durch Nutzung oder Nichtnutzung der Informationen entstehen, haftet allein der Anbieter der Website, auf die verwiesen wurde.
+        </p>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col footer-col-logo">
+                <a href="index.html"><img src="img/logo.jpg" alt="Edmund Siemers-Stiftung"></a>
+            </div>
+            <div class="footer-col">
+                <div class="footer-label">Navigation</div>
+                <ul>
+                    <li><a href="stiftung.html">Die Stiftung</a></li>
+                    <li><a href="foerderung.html">Förderung</a></li>
+                    <li><a href="projekte.html">Projekte</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <div class="footer-label">Rechtliches</div>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <div class="footer-label">Kontakt</div>
+                <p>Schlankreye 67<br>20144 Hamburg</p>
+                <p style="margin-top:12px;"><a href="mailto:info@edmundsiemers-stiftung.de">info@edmundsiemers-stiftung.de</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 Edmund Siemers-Stiftung</div>
+    </footer>
+</body>
+</html>
