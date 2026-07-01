@@ -5,164 +5,249 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontakt | Edmund Siemers-Stiftung</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --ink:   #1a1a18; --mid: #4a4a44; --light: #8a8a80;
-      --rule:  #d8d4cc; --bg: #faf9f6; --cream: #f2efe8;
+      --ink:   #1a1a18;
+      --mid:   #4a4a44;
+      --light: #8a8a80;
+      --rule:  #d8d4cc;
+      --bg:    #faf9f6;
+      --cream: #f2efe8;
       --red:   #b8003a;
     }
 
-    /* ── NAV ─────────────────────────────────────────── */
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 72px;
+      padding: 0 40px; height: 68px;
       background: rgba(250,249,246,0.97);
       border-bottom: 1px solid var(--rule);
     }
-    .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img { height: 40px; width: auto; }
-    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-logo { text-decoration: none; }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a {
-      font-size: 13px; font-weight: 400; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--mid); text-decoration: none;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--red); }
 
-    /* ── HAMBURGER ───────────────────────────────────── */
+    /* HAMBURGER */
     .hamburger {
       display: none; flex-direction: column; justify-content: center;
-      gap: 6px; background: none; border: none; cursor: pointer;
-      padding: 8px; z-index: 1001;
+      gap: 5px; background: none; border: none; cursor: pointer; padding: 6px;
     }
     .hamburger span {
-      display: block; width: 24px; height: 2px;
-      background: var(--ink); border-radius: 2px;
-      transition: all 0.25s ease;
-      transform-origin: center;
+      display: block; width: 22px; height: 1.5px; background: var(--ink);
+      transition: all 0.25s; transform-origin: center;
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* ── MOBILE OVERLAY ──────────────────────────────── */
-    .mobile-overlay {
+    /* MOBILE OVERLAY */
+    .mob-menu {
       display: none; position: fixed;
-      top: 72px; left: 0; right: 0; bottom: 0;
-      z-index: 999;
-      background: var(--bg);
-      padding: 32px 24px;
+      top: 68px; left: 0; right: 0; bottom: 0; z-index: 999;
+      background: var(--bg); padding: 24px;
       flex-direction: column;
-      gap: 0;
-      overflow-y: auto;
     }
-    .mobile-overlay.open { display: flex; }
-    .mobile-overlay a {
-      font-size: 22px; font-family: 'Playfair Display', serif;
-      font-weight: 400; color: var(--ink); text-decoration: none;
-      padding: 20px 0; border-bottom: 1px solid var(--rule);
-      display: block;
+    .mob-menu.open { display: flex; }
+    .mob-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; color: var(--ink); text-decoration: none;
+      padding: 18px 0; border-bottom: 1px solid var(--rule);
     }
-    .mobile-overlay a:hover { color: var(--red); }
+    .mob-menu a:hover { color: var(--red); }
 
-    @media (max-width: 900px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-    }
-
-    html { scroll-behavior: smooth; }
-    body { font-family: "Inter", sans-serif; background: var(--bg); color: var(--ink); font-size: 16px; line-height: 1.7; }
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 72px;
-      background: rgba(250,249,246,0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--rule);
-    }
-    .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img { height: 40px; width: auto; }
-    .nav-links { display: flex; gap: 40px; list-style: none; }
-    .nav-links a {
-      font-size: 13px; font-weight: 400; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--red); }
+    /* PAGE HERO */
     .page-hero {
-      padding: 140px 48px 80px;
-      max-width: 1200px; margin: 0 auto;
+      padding: 120px 40px 64px;
+      max-width: 1100px; margin: 0 auto;
       border-bottom: 1px solid var(--rule);
     }
     .eyebrow {
       font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+      text-transform: uppercase; color: var(--red);
       display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
     }
-    .eyebrow::before { content: ""; display: block; width: 32px; height: 1px; background: var(--red); }
-    h1 { font-family: "Playfair Display", serif; font-size: clamp(36px, 4vw, 56px); font-weight: 400; line-height: 1.15; margin-bottom: 24px; }
-    h2 { font-family: "Playfair Display", serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; line-height: 1.25; margin-bottom: 20px; }
-    h3 { font-family: "Playfair Display", serif; font-size: 20px; font-weight: 500; line-height: 1.3; margin-bottom: 12px; }
-    .lead { font-size: 18px; color: var(--mid); line-height: 1.8; max-width: 680px; }
-    .content { max-width: 1200px; margin: 0 auto; padding: 80px 48px; }
-    .content p { font-size: 15px; color: var(--mid); line-height: 1.85; margin-bottom: 20px; max-width: 720px; }
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; display: block; }
-    .divider { border: none; border-top: 1px solid var(--rule); margin: 60px 0; }
-    .card { background: var(--cream); padding: 40px; }
+    .eyebrow::before {
+      content: ''; display: block;
+      width: 28px; height: 1px; background: var(--red);
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 400; line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .lead {
+      font-size: 17px; color: var(--mid);
+      line-height: 1.8; max-width: 600px;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 1100px; margin: 0 auto;
+      padding: 64px 40px;
+    }
+
+    .section-label {
+      display: block;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 400; line-height: 1.25; margin-bottom: 20px;
+    }
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px; font-weight: 500;
+      line-height: 1.3; margin-bottom: 12px;
+    }
+    p {
+      font-size: 15px; color: var(--mid);
+      line-height: 1.85; margin-bottom: 18px;
+      max-width: 680px;
+    }
+    hr { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
+
+    /* GRID */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: start;
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--cream); padding: 36px;
+      transition: background 0.2s;
+    }
     .card:hover { background: white; }
-    footer {
-      padding: 48px; border-top: 1px solid var(--rule);
-      display: flex; align-items: center; justify-content: space-between;
-      max-width: 1200px; margin: 0 auto;
+    .card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px; color: #e0dbd2;
+      line-height: 1; margin-bottom: 20px;
     }
-    .footer-logo img { height: 32px; opacity: 0.7; }
-    .footer-links { display: flex; gap: 32px; list-style: none; }
-    .footer-links a { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--light); text-decoration: none; }
+    .card p { max-width: none; margin-bottom: 0; }
+
+    /* BLOG LIST */
+    .blog-list { display: flex; flex-direction: column; gap: 2px; }
+    .blog-item {
+      display: grid; grid-template-columns: 140px 1fr;
+      background: var(--cream); transition: background 0.2s;
+    }
+    .blog-item:hover { background: white; }
+    .blog-meta {
+      padding: 32px 24px;
+      border-right: 1px solid var(--rule);
+    }
+    .blog-date {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--red);
+    }
+    .blog-cat {
+      font-size: 11px; color: var(--light);
+      margin-top: 6px; line-height: 1.4;
+    }
+    .blog-body { padding: 32px 36px; }
+    .blog-body h3 { margin-bottom: 8px; }
+    .blog-body p { margin-bottom: 0; font-size: 14px; }
+
+    /* CONTACT */
+    .contact-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--light); margin-bottom: 6px;
+    }
+    .contact-value {
+      font-size: 16px; color: var(--ink);
+      text-decoration: none; display: block;
+    }
+    a.contact-value:hover { color: var(--red); }
+
+    .btn-red {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--red); color: white;
+      padding: 14px 24px; text-decoration: none;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; cursor: pointer; width: 100%;
+      justify-content: center;
+    }
+
+    /* FOOTER */
+    .site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 40px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .site-footer img { height: 28px; opacity: 0.6; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a {
+      font-size: 11px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--light); text-decoration: none;
+    }
     .footer-links a:hover { color: var(--ink); }
-    .footer-copy { font-size: 12px; color: var(--light); }
-    @media (max-width: 900px) {
-      nav { padding: 0 24px; } .nav-links { display: none; }
-      .page-hero { padding: 110px 24px 60px; }
-      .content { padding: 60px 24px; }
-      .two-col, .three-col { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
-    }
+    .footer-copy { font-size: 11px; color: var(--light); }
 
-    /* ── MOBILE NAV ─────────────────────────────────────────────── */
-    .hamburger {
-      display: none;
-      flex-direction: column; justify-content: center; gap: 5px;
-      width: 36px; height: 36px; cursor: pointer;
-      background: none; border: none; padding: 4px;
-    }
-    .hamburger span {
-      display: block; width: 22px; height: 1.5px;
-      background: var(--ink); transition: all 0.3s;
-    }
-    .mobile-menu {
-      display: none;
-      position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
-      background: var(--bg);
-      border-bottom: 1px solid var(--rule);
-      padding: 16px 24px 24px;
-      flex-direction: column; gap: 0;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-size: 15px; font-weight: 400; letter-spacing: 0.04em;
-      color: var(--ink); text-decoration: none;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--rule);
-    }
-    .mobile-menu a:last-child { border-bottom: none; }
-    @media (max-width: 900px) {
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
       .hamburger { display: flex; }
-      .nav-links { display: none !important; }
-    }
 
+      .page-hero { padding: 100px 20px 48px; }
+      .content { padding: 48px 20px; }
+
+      .two-col { grid-template-columns: 1fr; gap: 48px; }
+      .three-col { grid-template-columns: 1fr; }
+
+      .blog-item { grid-template-columns: 1fr; }
+      .blog-meta {
+        padding: 20px 20px 0;
+        border-right: none; border-bottom: 1px solid var(--rule);
+        display: flex; gap: 12px; align-items: center;
+        padding-bottom: 12px;
+      }
+      .blog-body { padding: 16px 20px 24px; }
+
+      .site-footer {
+        flex-direction: column; gap: 20px;
+        text-align: center; padding: 32px 20px;
+      }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+
+      h1 { font-size: 32px; }
+      h2 { font-size: 24px; }
+      h3 { font-size: 18px; }
+      .lead { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -174,96 +259,80 @@
     <li><a href="projekte.html">Projekte</a></li>
     <li><a href="kontakt.html" class="active">Kontakt</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menü öffnen">
+  <button class="hamburger" id="hbg" onclick="toggleNav()" aria-label="Menü">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="mobile-overlay" id="mobileOverlay">
+<div class="mob-menu" id="mobMenu">
   <a href="stiftung.html" onclick="toggleNav()">Die Stiftung</a>
   <a href="foerderung.html" onclick="toggleNav()">Förderung</a>
   <a href="projekte.html" onclick="toggleNav()">Projekte</a>
   <a href="kontakt.html" onclick="toggleNav()">Kontakt</a>
 </div>
 <script>
-function toggleNav() {
-  var h = document.getElementById('hamburger');
-  var m = document.getElementById('mobileOverlay');
-  h.classList.toggle('open');
-  m.classList.toggle('open');
-  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+function toggleNav(){
+  var h=document.getElementById('hbg'), m=document.getElementById('mobMenu');
+  h.classList.toggle('open'); m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
 </script>
-
 <section class="page-hero">
   <div class="eyebrow">Kontakt</div>
   <h1>Schreiben<br>Sie uns</h1>
-  <p class="lead">
-    Wir freuen uns über Förderanträge, Fragen und Anregungen.
-  </p>
+  <p class="lead">Wir freuen uns über Förderanträge, Fragen und Anregungen.</p>
 </section>
 
 <div class="content">
   <div class="two-col">
-
-    <div>
-      <span class="section-label">Adresse</span>
-      <h2 style="margin-bottom: 32px;">Edmund Siemers-Stiftung</h2>
-
-      <div style="display: flex; flex-direction: column; gap: 28px;">
-        <div>
-          <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--light); margin-bottom: 6px;">Postanschrift</div>
-          <p style="font-size: 15px; color: var(--ink); line-height: 1.6; margin-bottom: 0;">
-            Schlankreye 67<br>
-            20144 Hamburg
-          </p>
-        </div>
-        <div>
-          <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--light); margin-bottom: 6px;">Telefon</div>
-          <a href="tel:04042063398" style="font-size: 15px; color: var(--ink); text-decoration: none;">040 420 63 98</a>
-        </div>
-        <div>
-          <div style="font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--light); margin-bottom: 6px;">E-Mail</div>
-          <a href="mailto:info@edmundsiemers-stiftung.de" style="font-size: 15px; color: var(--ink); text-decoration: none; display: block; margin-bottom: 6px;">info@edmundsiemers-stiftung.de</a>
-          <a href="mailto:foerderantrag@edmundsiemers-stiftung.de" style="font-size: 15px; color: var(--mid); text-decoration: none;">foerderantrag@edmundsiemers-stiftung.de</a>
-          <div style="font-size: 12px; color: var(--light); margin-top: 4px;">für Förderanträge</div>
-        </div>
+    <div style="display:flex;flex-direction:column;gap:32px;">
+      <div>
+        <div class="contact-label">Postanschrift</div>
+        <p style="max-width:none;margin-bottom:0;font-size:15px;color:var(--ink);">Edmund Siemers-Stiftung<br>Schlankreye 67<br>20144 Hamburg</p>
+      </div>
+      <div>
+        <div class="contact-label">Telefon</div>
+        <a href="tel:04042063398" class="contact-value">040 420 63 98</a>
+      </div>
+      <div>
+        <div class="contact-label">E-Mail</div>
+        <a href="mailto:info@edmundsiemers-stiftung.de" class="contact-value">info@edmundsiemers-stiftung.de</a>
+        <a href="mailto:foerderantrag@edmundsiemers-stiftung.de" class="contact-value" style="font-size:14px;color:var(--mid);margin-top:6px;">foerderantrag@edmundsiemers-stiftung.de</a>
+        <div style="font-size:12px;color:var(--light);margin-top:4px;">für Förderanträge</div>
       </div>
     </div>
 
     <div>
       <span class="section-label">Förderantrag</span>
-      <h2 style="margin-bottom: 20px;">Antrag einreichen</h2>
-      <p style="font-size: 15px; color: var(--mid); margin-bottom: 24px;">
-        Wir freuen uns auf Ihre Projekte. Um diese in den Stiftungsratssitzungen
-        zu berücksichtigen, bitten wir um Einreichung bis:
-      </p>
-      <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px;">
-        <div style="background: var(--cream); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 14px; font-weight: 500;">Ende Mai</span>
-          <span style="font-size: 12px; color: var(--light); letter-spacing: 0.06em; text-transform: uppercase;">Sitzung im Juni</span>
+      <h2 style="margin-bottom:16px;">Antrag einreichen</h2>
+      <p>Wir freuen uns auf Ihre Projekte. Bitte reichen Sie bis zu folgenden Fristen ein:</p>
+      <div style="display:flex;flex-direction:column;gap:2px;margin:24px 0 32px;">
+        <div style="background:var(--cream);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:14px;font-weight:500;">Ende Mai</span>
+          <span style="font-size:11px;color:var(--light);letter-spacing:0.06em;text-transform:uppercase;">Sitzung im Juni</span>
         </div>
-        <div style="background: var(--cream); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 14px; font-weight: 500;">Ende Oktober</span>
-          <span style="font-size: 12px; color: var(--light); letter-spacing: 0.06em; text-transform: uppercase;">Sitzung im November</span>
+        <div style="background:var(--cream);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:14px;font-weight:500;">Ende Oktober</span>
+          <span style="font-size:11px;color:var(--light);letter-spacing:0.06em;text-transform:uppercase;">Sitzung im November</span>
         </div>
       </div>
-      <a href="mailto:foerderantrag@edmundsiemers-stiftung.de"
-         style="display: inline-flex; align-items: center; gap: 10px; background: var(--red); color: white; padding: 16px 28px; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;">
+      <a href="mailto:foerderantrag@edmundsiemers-stiftung.de" class="btn-red" style="width:auto;justify-content:flex-start;">
         Förderantrag senden
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
-
   </div>
 </div>
+
 <footer>
-  <div class="footer-logo"><img src="img/logo.jpg" alt="Edmund Siemers-Stiftung"></div>
-  <ul class="footer-links">
-    <li><a href="#">Impressum</a></li>
-    <li><a href="#">Datenschutz</a></li>
-    <li><a href="kontakt.html">Kontakt</a></li>
-  </ul>
-  <span class="footer-copy">&copy; 2026 Edmund Siemers-Stiftung</span>
+  <div class="site-footer">
+    <img src="img/logo.jpg" alt="Edmund Siemers-Stiftung">
+    <ul class="footer-links">
+      <li><a href="#">Impressum</a></li>
+      <li><a href="#">Datenschutz</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2026 Edmund Siemers-Stiftung</span>
+  </div>
 </footer>
 </body>
 </html>
