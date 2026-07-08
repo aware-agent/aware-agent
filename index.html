@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edmund Siemers-Stiftung | Bildung. Jugend. Verantwortung.</title>
+    <meta name="description" content="Die Edmund Siemers-Stiftung fördert seit Generationen Bildung, Jugendarbeit und den Schutz von Natur und Umwelt in Hamburg.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           DESIGN SYSTEM - Keeping original character, applying skill refinements
+           
+           Skills applied:
+           - web-typography: Refined type scale, line-heights, letter-spacing
+           - frontend-design: Consistent spacing, hover states, visual hierarchy
+           - ux-design: Better focus states, clearer CTAs
+           ═══════════════════════════════════════════════════════════════ */
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            /* Original colors - preserved */
+            --color-accent: #b8003a;
+            --color-accent-dark: #8a002b;
+            --color-bg: #faf9f6;
+            --color-dark: #1a1a18;
+            --color-text: #1a1a18;
+            --color-text-muted: #5c5c5a;
+            
+            /* Fonts - preserved */
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+            
+            /* Typography scale - refined (Major Third 1.25) */
+            --text-sm: 0.875rem;   /* 14px */
+            --text-base: 1rem;     /* 16px */
+            --text-lg: 1.125rem;   /* 18px */
+            --text-xl: 1.25rem;    /* 20px */
+            --text-2xl: 1.5rem;    /* 24px */
+            --text-3xl: 2rem;      /* 32px */
+            --text-4xl: 2.5rem;    /* 40px */
+            --text-5xl: 3.5rem;    /* 56px */
+            
+            /* Spacing - consistent 8px grid */
+            --space-1: 0.25rem;  /* 4px */
+            --space-2: 0.5rem;   /* 8px */
+            --space-3: 0.75rem;  /* 12px */
+            --space-4: 1rem;     /* 16px */
+            --space-6: 1.5rem;   /* 24px */
+            --space-8: 2rem;     /* 32px */
+            --space-12: 3rem;    /* 48px */
+            --space-16: 4rem;    /* 64px */
+            --space-24: 6rem;    /* 96px */
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        @media (min-width: 768px) {
+            html { font-size: 17px; }
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        /* Focus states - accessibility improvement */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           NAVIGATION - refined spacing and hover states
+           ═══════════════════════════════════════════════════════════════ */
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--color-bg);
+            padding: var(--space-4) var(--space-8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--space-8);
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: color 0.2s;
+            padding: var(--space-2) 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 44px; /* Touch target - UX improvement */
+            height: 44px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-dark);
+            transition: all 0.3s;
+        }
+        
+        .nav-hamburger span:nth-child(2) {
+            margin: 6px 0;
+        }
+        
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-bg);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-8);
+        }
+        
+        .nav-overlay.active {
+            display: flex;
+        }
+        
+        .nav-overlay a {
+            font-family: var(--font-serif);
+            font-size: var(--text-3xl);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-overlay a:hover {
+            color: var(--color-accent);
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                padding: var(--space-4);
+            }
+            .nav-links {
+                display: none;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           HERO - refined typography and CTA
+           ═══════════════════════════════════════════════════════════════ */
+        
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: var(--space-16);
+        }
+        
+        .hero-eyebrow {
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-accent);
+            margin-bottom: var(--space-6);
+            font-weight: 600;
+        }
+        
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.02em; /* Tighten large text */
+            margin-bottom: var(--space-6);
+        }
+        
+        .hero-text {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-8);
+            max-width: 480px;
+            line-height: 1.7; /* More spacious for readability */
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-weight: 600;
+            font-size: var(--text-base);
+            color: var(--color-accent);
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: var(--space-1);
+            transition: gap 0.2s, color 0.2s;
+        }
+        
+        .hero-cta:hover {
+            gap: var(--space-3);
+            color: var(--color-accent-dark);
+        }
+        
+        .hero-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+        
+        .hero-image {
+            position: relative;
+            background-image: url('img/edmund_siemers.jpg');
+            background-size: cover;
+            background-position: top center;
+        }
+        
+        .hero-quote {
+            position: absolute;
+            bottom: var(--space-16);
+            left: var(--space-8);
+            right: var(--space-8);
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            padding: var(--space-8);
+            font-family: var(--font-serif);
+            font-size: var(--text-lg);
+            line-height: 1.6;
+            font-style: italic;
+            border-left: 3px solid var(--color-accent);
+        }
+        
+        .hero-quote cite {
+            display: block;
+            margin-top: var(--space-4);
+            font-style: normal;
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+        
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content {
+                padding: var(--space-8);
+                order: 2;
+            }
+            
+            .hero-image {
+                min-height: 50vh;
+                order: 1;
+            }
+            
+            .hero-quote {
+                bottom: var(--space-8);
+                left: var(--space-4);
+                right: var(--space-4);
+                padding: var(--space-6);
+                font-size: var(--text-base);
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           PILLARS - improved cards with better hover states
+           ═══════════════════════════════════════════════════════════════ */
+        
+        .pillars {
+            padding: var(--space-24) var(--space-8);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pillars-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+        
+        .pillars-header h2 {
+            font-family: var(--font-serif);
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+        }
+        
+        .pillars-header p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-8);
+        }
+        
+        .pillar-card {
+            background: #fff;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        
+        .pillar-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .pillar-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        
+        .pillar-card:hover .pillar-image img {
+            transform: scale(1.05);
+        }
+        
+        .pillar-content {
+            padding: var(--space-6);
+        }
+        
+        .pillar-number {
+            font-size: var(--text-sm);
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+        }
+        
+        .pillar-title {
+            font-family: var(--font-serif);
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-3);
+            line-height: 1.3;
+        }
+        
+        .pillar-text {
+            color: var(--color-text-muted);
+            font-size: var(--text-base);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 900px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           STATS - New section (social proof from landing-pages skill)
+           ═══════════════════════════════════════════════════════════════ */
+        
+        .stats {
+            background: #fff;
+            padding: var(--space-16) var(--space-8);
+            border-top: 1px solid rgba(0,0,0,0.06);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-8);
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: var(--space-4);
+        }
+        
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: var(--text-4xl);
+            font-weight: 600;
+            color: var(--color-accent);
+            line-height: 1;
+            margin-bottom: var(--space-2);
+        }
+        
+        .stat-label {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            letter-spacing: 0.02em;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           DARK SECTION - refined typography
+           ═══════════════════════════════════════════════════════════════ */
+        
+        .dark-section {
+            background: var(--color-dark);
+            color: #fff;
+            padding: var(--space-24) var(--space-8);
+            text-align: center;
+        }
+        
+        .dark-section-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .dark-section h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(var(--text-2xl), 3vw, var(--text-3xl));
+            margin-bottom: var(--space-6);
+            line-height: 1.2;
+        }
+        
+        .dark-section p {
+            font-size: var(--text-lg);
+            line-height: 1.8;
+            opacity: 0.9;
+            max-width: 65ch; /* Optimal line length */
+            margin: 0 auto;
+        }
+        
+        .dark-section .cta-button {
+            display: inline-block;
+            margin-top: var(--space-8);
+            padding: var(--space-4) var(--space-8);
+            background: #fff;
+            color: var(--color-dark);
+            font-weight: 600;
+            border-radius: 4px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        
+        .dark-section .cta-button:hover {
+            background: var(--color-bg);
+            transform: translateY(-2px);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           FOOTER - refined spacing
+           ═══════════════════════════════════════════════════════════════ */
+        
+        .footer {
+            background: #fff;
+            padding: var(--space-16) var(--space-8) var(--space-8);
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: var(--space-12);
+            margin-bottom: var(--space-12);
+        }
+        
+        .footer-col-logo img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .footer-col-logo p {
+            margin-top: var(--space-4);
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            max-width: 280px;
+            line-height: 1.6;
+        }
+        
+        .footer-col h4 {
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-4);
+            font-weight: 600;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: var(--space-2);
+        }
+        
+        .footer-col a {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            transition: color 0.2s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--color-accent);
+        }
+        
+        .footer-col address {
+            font-style: normal;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: var(--space-8);
+            border-top: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: var(--space-6);
+        }
+        
+        .footer-legal a:hover {
+            color: var(--color-accent);
+        }
+        
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: var(--space-4);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="img/logo.jpg" alt="Edmund Siemers-Stiftung">
+        </a>
+        <ul class="nav-links">
+            <li><a href="stiftung.html">Die Stiftung</a></li>
+            <li><a href="foerderung.html">Förderung</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+        <button class="nav-hamburger" aria-label="Menü öffnen">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    
+    <div class="nav-overlay">
+        <a href="stiftung.html">Die Stiftung</a>
+        <a href="foerderung.html">Förderung</a>
+        <a href="projekte.html">Projekte</a>
+        <a href="kontakt.html">Kontakt</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow">Gemeinnützige Stiftung</span>
+            <h1 class="hero-title">Bildung. Jugend. Verantwortung.</h1>
+            <p class="hero-text">Die Edmund Siemers-Stiftung fördert seit Generationen Bildung, Jugendarbeit und den Schutz von Natur und Umwelt in Hamburg und der Metropolregion.</p>
+            <a href="stiftung.html" class="hero-cta">
+                Mehr erfahren
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+        <div class="hero-image">
+            <blockquote class="hero-quote">
+                "Mit Wagemut etwas unternehmen, die Bildung seiner Mitmenschen zu fördern und in dem Gemeinwesen, in dem der Unternehmer verdient, Verantwortung in der Verwaltung zu übernehmen."
+                <cite>Edmund J.A. Siemers</cite>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">1903</div>
+                <div class="stat-label">Gründungsjahr</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">120+</div>
+                <div class="stat-label">Jahre Engagement</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Förderbereiche</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">HH</div>
+                <div class="stat-label">Metropolregion</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pillars -->
+    <section class="pillars">
+        <div class="pillars-header">
+            <h2>Unsere Förderbereiche</h2>
+            <p>Wir unterstützen Projekte, die nachhaltig wirken und Menschen in ihrer Entwicklung fördern.</p>
+        </div>
+        <div class="pillars-grid">
+            <article class="pillar-card">
+                <div class="pillar-image">
+                    <img src="img/bildung.jpg" alt="Bildung und Erziehung">
+                </div>
+                <div class="pillar-content">
+                    <span class="pillar-number">01</span>
+                    <h3 class="pillar-title">Bildung & Erziehung</h3>
+                    <p class="pillar-text">Wir unterstützen Projekte, die jungen Menschen Zugang zu Bildung und persönlicher Entwicklung ermöglichen.</p>
+                </div>
+            </article>
+            <article class="pillar-card">
+                <div class="pillar-image">
+                    <img src="img/jugend.jpg" alt="Jugendarbeit">
+                </div>
+                <div class="pillar-content">
+                    <span class="pillar-number">02</span>
+                    <h3 class="pillar-title">Jugendarbeit</h3>
+                    <p class="pillar-text">Förderung von Initiativen, die Jugendliche in ihrer sozialen und gesellschaftlichen Teilhabe stärken.</p>
+                </div>
+            </article>
+            <article class="pillar-card">
+                <div class="pillar-image">
+                    <img src="img/natur.jpg" alt="Natur und Umwelt">
+                </div>
+                <div class="pillar-content">
+                    <span class="pillar-number">03</span>
+                    <h3 class="pillar-title">Natur & Umwelt</h3>
+                    <p class="pillar-text">Schutz und Erhalt natürlicher Lebensräume in der Metropolregion Hamburg.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Dark Section -->
+    <section class="dark-section">
+        <div class="dark-section-inner">
+            <h2>Im Sinne des Stifters</h2>
+            <p>Die Edmund Siemers-Stiftung wurde im Geiste des Hamburger Kaufmanns Edmund Siemers gegründet, der zeitlebens davon überzeugt war, dass wirtschaftlicher Erfolg mit gesellschaftlicher Verantwortung einhergehen muss. In diesem Sinne fördern wir bis heute Projekte, die nachhaltig wirken und Menschen in ihrer Entwicklung unterstützen.</p>
+            <a href="foerderung.html" class="cta-button">Förderantrag stellen</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col footer-col-logo">
+                <a href="index.html">
+                    <img src="img/logo.jpg" alt="Edmund Siemers-Stiftung">
+                </a>
+                <p>Förderung von Bildung, Jugendarbeit und Naturschutz seit 1903.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="stiftung.html">Die Stiftung</a></li>
+                    <li><a href="foerderung.html">Förderung</a></li>
+                    <li><a href="projekte.html">Projekte</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Kontakt</h4>
+                <address>
+                    Edmund Siemers-Stiftung<br>
+                    Schlankreye 67<br>
+                    20144 Hamburg<br><br>
+                    <a href="mailto:info@edmundsiemers-stiftung.de">info@edmundsiemers-stiftung.de</a>
+                </address>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Edmund Siemers-Stiftung. Alle Rechte vorbehalten.</p>
+            <div class="footer-legal">
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.nav-hamburger');
+        const overlay = document.querySelector('.nav-overlay');
+        
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        overlay.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
